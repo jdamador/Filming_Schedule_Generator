@@ -1,0 +1,7 @@
+F:\Code as Profesional\FilmingReneratorSystem\FilmingReneratorSystem\obj\Debug\FilmingReneratorSystem.csprojResolveAssemblyReference.cache
+F:\Code as Profesional\FilmingReneratorSystem\FilmingReneratorSystem\obj\Debug\FilmingReneratorSystem.csproj.CoreCompileInputs.cache
+F:\Code as Profesional\FilmingReneratorSystem\FilmingReneratorSystem\bin\Debug\FilmingReneratorSystem.exe.config
+F:\Code as Profesional\FilmingReneratorSystem\FilmingReneratorSystem\bin\Debug\FilmingReneratorSystem.exe
+F:\Code as Profesional\FilmingReneratorSystem\FilmingReneratorSystem\bin\Debug\FilmingReneratorSystem.pdb
+F:\Code as Profesional\FilmingReneratorSystem\FilmingReneratorSystem\obj\Debug\FilmingReneratorSystem.exe
+F:\Code as Profesional\FilmingReneratorSystem\FilmingReneratorSystem\obj\Debug\FilmingReneratorSystem.pdb
