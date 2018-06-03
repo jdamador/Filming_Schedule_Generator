@@ -31,7 +31,7 @@ namespace FilmingReneratorSystem
                     for (int k = 0; k < listScenes[i].listActors[j].available.Count; k++)
                     { // Time
 
-                        if (listScenes[i].listActors[j].available[k].idFilmingDay == i + 1)
+                        if (listScenes[i].listActors[j].available[k].numDia == i + 1)
                         {
                             time = listScenes[i].listActors[j].available[k];
                             if (!checkLocalitation(listScenes[i], time))
