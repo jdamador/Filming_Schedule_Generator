@@ -14,14 +14,19 @@ namespace FilmingReneratorSystem
         public String id;
         public int numDia;                  /*day or night*/
         public int maxHour;
-
-        public FilmingDay(String id, int num)
+        public bool isDay;
+        public FilmingDay(bool isDay, int num)
         {
             numDia = num;
-            this.id = id;
+           isDay = isDay;
+            setId();
         }
-        public void setIsDay(bool isDay)
+        public void setId()
         {
+            if (isDay)
+                id = "D" + numDia + "-M";
+            else
+                id = "D" + numDia + "-N";
         }
     }
 }

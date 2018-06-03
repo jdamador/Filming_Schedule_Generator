@@ -82,24 +82,24 @@ namespace FilmingReneratorSystem
         public void createFilmingDay()
         {
             /********************** Stage Number 1*********************/
-            String[] days1 = {"D", "D", "N", "D"};
-            int[] num1 =     { 1 ,  2 ,  2 ,  3};
-            for (int i = 0; i < 4; i++)
+            bool[] days1 = {true, true, false};
+            int[] num1 =     { 1 ,  2  ,  3};
+            for (int i = 0; i < days1.Count(); i++)
                 stages[0].filmingDays.Add(new FilmingDay(days1[i], num1[i]));
             /********************** Stage Number 2*********************/
-            String[] days2 = { "D", "N", "N", "N", "D"};
-            int[] num2 =     {  1,   1,   2,   3,   4, }; 
-            for (int i = 0; i < 4; i++)
+            bool[] days2 = { true, false , true, false};
+            int[] num2 =     {  1,   2,   3,   4}; 
+            for (int i = 0; i < days2.Count(); i++)
                 stages[0].filmingDays.Add(new FilmingDay(days2[i], num2[i]));
             /********************** Stage Number 3*********************/
-            String[] days3 = { "D", "D", "N", "N", "D", "N"};
-            int[] num3 =     {  1,   2,   3,   4,   5,   5};
-            for (int i = 0; i < 4; i++)
+            bool[] days3 = { true, true, false, false, false};
+            int[] num3 =   { 1,      2,    3,     4,      5 };
+            for (int i = 0; i < days3.Count(); i++)
                 stages[0].filmingDays.Add(new FilmingDay(days3[i], num3[i]));
             /********************** Stage Number 4*********************/
-            String[] days4 = { "D", "D", "N", "N", "D", "N", "N" };
-            int[] num4 = { 1, 2, 3, 4, 5, 5, 6 };
-            for (int i = 0; i < 4; i++)
+            bool[] days4 = { true, true, false, false, true, false  };
+            int[] num4 = {    1,    2,    3,     4,     5,     6 };
+            for (int i = 0; i < days4.Count(); i++)
                 stages[0].filmingDays.Add(new FilmingDay(days4[i], num4[i]));
 
 
