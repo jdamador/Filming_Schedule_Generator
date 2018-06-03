@@ -23,7 +23,7 @@ namespace FilmingReneratorSystem
             { // Run Scenes
                 for (int j = 0; j < listScene[i].listActors.Count; j++)
                 { // Run Actors in Scenes
-                    finalCostCalendar += (listScene[i].listActors[j].lastDay.idFilmingDay - listScene[i].listActors[j].firstDay.idFilmingDay) * listScene[i].listActors[j].costXDay + 1; // Sums in the finalCost of calendar
+                    finalCostCalendar += (listScene[i].listActors[j].lastDay.numDia  - listScene[i].listActors[j].firstDay.numDia) * listScene[i].listActors[j].costXDay + 1; // Sums in the finalCost of calendar
                 }
             }
             return finalCostCalendar;

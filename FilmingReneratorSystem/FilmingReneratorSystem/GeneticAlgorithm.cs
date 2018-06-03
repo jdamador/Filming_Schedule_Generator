@@ -29,19 +29,17 @@ namespace FilmingReneratorSystem
         }
         public void orderOne_crossover()
         {
-            int min_cos;
-            Calendar bestCrossover;
             OrderOne_Crossover orderOne = new OrderOne_Crossover();
             List<Scene> child = orderOne.orderOneCrossover(father, mother);
-            asignedCost(child);
+            Evaluating evaluator = new Evaluating(stage);
+            if (evaluator.isFactible(child))
+            {
+
+            }
         }
         private List<T> ShallowClone<T>(List<T> items)
         {
             return new List<T>(items);
-
-        }
-        public void asignedCost(List<Scene> solution)
-        {
 
         }
     }
