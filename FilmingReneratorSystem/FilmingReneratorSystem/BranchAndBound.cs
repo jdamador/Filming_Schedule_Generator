@@ -58,7 +58,7 @@ namespace FilmingReneratorSystem
                     // Impletation LC-FIFO
                     if (!evaluation.isFactible(visited))
                     {
-                        continue;
+                        return;
                     }
                     else
                     {
