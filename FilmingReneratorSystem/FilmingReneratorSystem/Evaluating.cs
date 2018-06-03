@@ -22,121 +22,132 @@ namespace FilmingReneratorSystem
         /// 
         public bool isFactible(List<Scene> listScenes)
         {
-            FilmingDay time;
-            bool isGood = false;
-            for (int i = 0; i < listScenes.Count; i++)
-            { // Scenes
-                for (int j = 0; j < listScenes[i].listActors.Count; j++)
-                { // Actors 
-                    for (int k = 0; k < listScenes[i].listActors[j].available.Count; k++)
-                    { // Time
+            for (int k = 0; k < listScenes.Count; k++)
+            {
+              
+                
+                for (int i = 0; i < listScenes[k].listActors[0].available.Count; i++)
+                {
+                    FilmingDay day= listScenes[k].listActors[0].available[i];
+                    if (listScenes[k].listActors[1].available.Contains(day))
+                        if (listScenes[k].localizationScene.times.Contains(day))
+                            if(!listScenes[k].listActors[0].workedDays.Contains(day) && !listScenes[k].listActors[1].workedDays.Contains(day))
+                            {
+                                bool flag = true;
+                                for (int j = 0; j < listScenes[k].listActors[0].workedDays.Count; j++)
+                                {
+                                    FilmingDay a = listScenes[k].listActors[0].workedDays[j];
+                                    if(day.numDia==i + 1|| day.numDia == i + 2)
+                                        if (day.numDia==a.numDia + 1 || day.numDia == a.numDia - 1)
+                                            if (day.id != a.id)
+                                                flag = false;
+                                    
+                                }
+                                for (int j = 0; j < listScenes[k].listActors[1].workedDays.Count; j++)
+                                {
+                                    FilmingDay a = listScenes[k].listActors[1].workedDays[j];
+                                    if (day.numDia == i + 1 || day.numDia == i + 2)
+                                        if (day.numDia == a.numDia + 1 || day.numDia == a.numDia - 1)
+                                            if (day.id != a.id)
+                                                flag = false;
+                                }
+                                if (flag)
+                                {
 
-                        if (listScenes[i].listActors[j].available[k].numDia == i + 1)
-                        {
-                            time = listScenes[i].listActors[j].available[k];
-                            if (!checkLocalitation(listScenes[i], time))
-                            {
-                                return false;
+                                    // Falta chequear los dias si entra aqui 
+                                    listScenes[k].listActors[0].workedDays.Add(day);
+                                    listScenes[k].listActors[1].workedDays.Add(day);
+                                }
+                                else {
+                                     return false; }      
                             }
-                            else
-                            {
-                                isGood = true;
-                                break;
-                            }
-                        }
-                    }
-                    if (isGood == false) return false;
-                    isGood = false;
                 }
             }
-            setCostScenes(listScenes); // Set cost of Scenes
+           // setCostScenes(); // Set cost of Scenes
             return true; // Is good 
         }
+        
+       
 
-        /// <summary>
-        /// Check if the time is in localization
-        /// </summary>
-        /// <param name="scene"></param>
-        /// <param name="time"></param>
-        /// <returns></returns>
-        private bool checkLocalitation(Scene scene, FilmingDay time)
-        {
-            if (scene.localizationScene.times.Contains(time))
-                return true;
-            return false;
-        }
+    
+    
+    /// <summary>
+    /// Set Cost all Scenes of calendar
+    /// </summary>
+    /// <param name="listScenes"></param>
+    public void setCostScenes()
+    {
 
-        public void setCostScenes(List<Scene> listScenes)
-        {
+        setCostActors(); // Saca el costo de cada actor por dia
 
-            setCostActors(listScenes); // Saca el costo de cada actor por dia
-
-            // Costo por cada escena
-            for (int i = 0; i < listScenes.Count; i++)
+        // Costo por cada escena
+        foreach(Scene scene in stage.scenes)
             {
-                for (int k = 0; k < listScenes[i].listActors.Count; k++)
-                {
-                    listScenes[i].totalCost += listScenes[i].listActors[k].costXDay;
-                }
+                foreach(Actor actor in scene.listActors) { 
+                scene.totalCost += actor.costXDay;
             }
-        }
-        /// <summary>
-        /// Set Cost for Actor 
-        /// </summary>
-        /// <param name="listScenes"></param>
-        public void setCostActors(List<Scene> listScenes)
-        {
-            for (int i = 0; i < listScenes.Count; i++)
-            {
-                for (int k = 0; k < listScenes[i].listActors.Count; k++)
-                {
-                    if (!listActorModifiedDay.Contains(listScenes[i].listActors[k]))
-                    { // Actual Actor
-                        listScenes[i].listActors[k].firstDay = stage.filmingDays[i]; // La i es el dia ya que es donde esta colocada la escena
-                        listActorModifiedDay.Add(listScenes[i].listActors[k]);
-                    }
-                    else
-                    { // Si ya esta en la lista es por que ya se le asigno el primer dia de contratacion
-                        listScenes[i].listActors[k].lastDay = stage.filmingDays[i];
-
-                        listScenes[i].listActors[k].costXDay = ((listScenes[i].listActors[k].lastDay.numDia - listScenes[i].listActors[k].firstDay.numDia) + 1) * listScenes[i].listActors[k].cost; // Establece el costo a cada actor
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Get the cost of Scenes
-        /// </summary>
-        /// <param name="listScene"></param>
-        /// <returns></returns>
-
-        public int getCostScenes(List<Scene> listScene)
-        {
-            int finalCostCalendar = 0;
-            for (int i = 0; i < listScene.Count; i++)
-            { // Run Scenes
-                for (int j = 0; j < listScene[i].listActors.Count; j++)
-                { // Run Actors in Scenes
-                    finalCostCalendar += listScene[i].listActors[j].costXDay; // Sums in the finalCost of calendar
-                }
-            }
-            return finalCostCalendar;
-        }
-        /// <summary>
-        /// Get the cost of Scene
-        /// </summary>
-        /// <param name="scene"></param>
-        /// <returns></returns>
-        public int getCostScene(Scene scene)
-        {
-            int finalCostScene = 0;
-
-            for (int i = 0; i < scene.listActors.Count; i++)
-            { // Run Actors in Scenes
-                finalCostScene += scene.listActors[i].costXDay; // Sums in the finalCost of calendar
-            }
-            return finalCostScene;
         }
     }
+    /// <summary>
+    /// Set Cost for Actor 
+    /// </summary>
+    /// <param name="listScenes"></param>
+    public void setCostActors()
+    {
+        
+        foreach(Actor actor in stage.actors) {
+                int max = 0;
+                
+                int min = actor.workedDays[0].numDia;
+                
+
+            foreach (FilmingDay day in actor.workedDays) {
+                    if (day.numDia > max) {
+                        max = day.numDia;
+                        actor.lastDay = day;
+                    }
+                    if (day.numDia < min) {
+                        min = day.numDia;
+                        actor.firstDay = day;
+                    }
+            }
+            actor.costXDay = ((max - min) + 1) * actor.cost;
+
+        }
+    }
+
+    /// <summary>
+    /// Get the cost of Scenes
+    /// </summary>
+    /// <param name="listScene"></param>
+    /// <returns></returns>
+
+    public int getCostScenes(List<Scene> listScene)
+    {
+        int finalCostCalendar = 0;
+        for (int i = 0; i < listScene.Count; i++)
+        { // Run Scenes
+            for (int j = 0; j < listScene[i].listActors.Count; j++)
+            { // Run Actors in Scenes
+                finalCostCalendar += listScene[i].listActors[j].costXDay; // Sums in the finalCost of calendar
+            }
+        }
+        return finalCostCalendar;
+    }
+    /// <summary>
+    /// Get the cost of Scene
+    /// </summary>
+    /// <param name="scene"></param>
+    /// <returns></returns>
+    public int getCostScene(Scene scene)
+    {
+        int finalCostScene = 0;
+
+        for (int i = 0; i < scene.listActors.Count; i++)
+        { // Run Actors in Scenes
+            finalCostScene += scene.listActors[i].costXDay; // Sums in the finalCost of calendar
+        }
+        return finalCostScene;
+    }
+}
 }

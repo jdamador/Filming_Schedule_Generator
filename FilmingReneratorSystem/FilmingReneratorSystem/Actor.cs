@@ -15,7 +15,7 @@ namespace FilmingReneratorSystem
         public int costXDay { get; set; }           /* Pay per day*/
         public int cost { get; set; }
         public List<FilmingDay> available = new List<FilmingDay>();
-
+        public List<FilmingDay> workedDays = new List<FilmingDay>();
         public Actor(int id, int cost)
         {
             this.id = id;

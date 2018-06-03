@@ -12,7 +12,7 @@ namespace FilmingReneratorSystem
         //Movies contain a list of stage that need to film
 
         /*********All variable declaration here***********/
-        List<Stage> stages = new List<Stage>(); /*Stage List*/
+        public List<Stage> stages = new List<Stage>(); /*Stage List*/
 
         public Movie()
         {
@@ -45,7 +45,7 @@ namespace FilmingReneratorSystem
         {
             int[] list = { 3, 4, 5, 6 };
             for (int i = 0; i < 4; i++)
-                for (int j = 0; j <= list[i]; j++)
+                for (int j = 0; j < list[i]; j++)
                 {
                     stages[i].scenes.Add(new Scene(j + 1));
                 }
@@ -58,7 +58,7 @@ namespace FilmingReneratorSystem
         {
             int[] list = { 3, 3, 4, 5 };
             for (int i = 0; i < 4; i++)
-                for (int j = 0; j <= list[i]; j++)
+                for (int j = 0; j < list[i]; j++)
                 {
                     stages[i].actors.Add(new Actor(j + 1, (i + 2500 * 2) / 3));
                 }
@@ -70,7 +70,8 @@ namespace FilmingReneratorSystem
         {
             int[] list = { 3, 4, 5, 6 };
             for (int i = 0; i < 4; i++)
-                for (int j = 0; j <= list[i]; j++)
+                for (int j = 0; j < 
+                    list[i]; j++)
                 {
                     stages[i].locations.Add(new Location(j + 1));
                 }
@@ -82,7 +83,7 @@ namespace FilmingReneratorSystem
         {
             int[] list = { 3, 4, 4, 5 };
             for (int i = 0; i < 4; i++)
-                for (int j = 0; j <= list[i]; j++)
+                for (int j = 0; j < list[i]; j++)
                 {
                     stages[i].filmingDays.Add(new FilmingDay(j + 1, true));
                     stages[i].filmingDays.Add(new FilmingDay(j + 1, false));
@@ -184,6 +185,7 @@ namespace FilmingReneratorSystem
             stages[1].scenes[2].listActors.Add(stages[1].actors[1]);
             //Escenea 4
             stages[1].scenes[2].listActors.Add(stages[1].actors[1]);
+            stages[1].scenes[2].listActors.Add(stages[1].actors[2]);
         }
         public void setStage3()
         {

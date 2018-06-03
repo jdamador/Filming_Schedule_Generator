@@ -18,7 +18,7 @@ namespace FilmingReneratorSystem
         {
             evaluation = new Evaluating(stage);
             listScenes = ShallowClone(stage.scenes); // get all calendars in this stage
-            fillFirstCalendar(listScenes);
+           
 
             runBB();
             Console.ReadKey();
@@ -32,6 +32,9 @@ namespace FilmingReneratorSystem
             this.notVisited = ShallowClone(listScenes);
 
             goAlgorithm(notVisited);
+            Console.WriteLine("======== Mejor Escena ======== ");
+            seeCombination(bestCalendar.listScenes);
+            Console.WriteLine("Costo: "+bestCalendar.bestCost);
             Console.ReadKey();
 
         }
@@ -43,8 +46,15 @@ namespace FilmingReneratorSystem
         {
             if (notVisited.Count == 0)
             {
+                Console.WriteLine("======= Combinacion ======= ");
                 seeCombination(visited);
-
+                Console.WriteLine("Costo: " + evaluation.getCostScenes(visited));
+                if (bestCalendar.listScenes.Count == 0)
+                {// no tiene el mejor calendario
+               
+                    changeBestCalendar(visited);
+                    
+                }
                 if (evaluation.getCostScenes(visited) < bestCalendar.bestCost) // Get Cost
                 {
                     changeBestCalendar(visited);
@@ -54,16 +64,16 @@ namespace FilmingReneratorSystem
             {
                 foreach (Scene scene in notVisited)
                 {
-                    this.visited.Remove(scene); this.visited.Add(scene);
+                    
                     // Impletation LC-FIFO
-                    if (!evaluation.isFactible(visited))
+                    if (evaluation.isFactible(visited) == false)
                     {
                         return;
                     }
                     else
                     {
                         // Generate Combination
-
+                        this.visited.Remove(scene); this.visited.Add(scene);
 
                         List<Scene> auxScene = ShallowClone(notVisited);
                         auxScene.Remove(scene);
@@ -73,17 +83,7 @@ namespace FilmingReneratorSystem
                 }
             }
         }
-        public void setCostScene(List<Scene> list)
-        {
-            foreach (Scene scene in list)
-            {
-                foreach (Actor actor in scene.listActors)
-                {
-
-                }
-            }
-        }
-
+       
 
         /// <summary>
         /// Change Best Calendar
@@ -130,17 +130,6 @@ namespace FilmingReneratorSystem
             Console.WriteLine(var);
 
         }
-        /// <summary>
-        /// Set default best calendar
-        /// </summary>
-        /// <param name="listScenes"></param>
-        public void fillFirstCalendar(List<Scene> listScenes)
-        {
-            foreach (Scene e in listScenes)
-            {
-                bestCalendar.listScenes.Add(e);
-            }
-            bestCalendar.bestCost = evaluation.getCostScenes(listScenes);
-        }
+        
     }
 }
