@@ -99,7 +99,7 @@ namespace FilmingReneratorSystem
                     { // Si ya esta en la lista es por que ya se le asigno el primer dia de contratacion
                         listScenes[i].listActors[k].lastDay = stage.filmingDays[i];
 
-                        listScenes[i].listActors[k].costXDay = ((listScenes[i].listActors[k].lastDay.idFilmingDay - listScenes[i].listActors[k].firstDay.idFilmingDay) + 1) * listScenes[i].listActors[k].cost; // Establece el costo a cada actor
+                        listScenes[i].listActors[k].costXDay = ((listScenes[i].listActors[k].lastDay.numDia - listScenes[i].listActors[k].firstDay.numDia) + 1) * listScenes[i].listActors[k].cost; // Establece el costo a cada actor
                     }
                 }
             }

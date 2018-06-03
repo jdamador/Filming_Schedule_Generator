@@ -11,25 +11,29 @@ namespace FilmingReneratorSystem
         //Filming day are all day available to film this movie
 
         /**************All variables declaration here**************/
-        public int idFilmingDay;
+        public String id;
+        public int numDia;
         public bool isDay;                     /*day or night*/
         public int maxHour;
 
         public FilmingDay(int id, bool dia)
         {
-            this.idFilmingDay = id;
-        }
-        public FilmingDay()
-        {
-
+            this.numDia = id;
         }
         public void setIsDay(bool isDay)
         {
             this.isDay = isDay;
             if (isDay)
+            {
                 maxHour = 8;
+                id = "D" + numDia + "-D";
+            }
             else
+            {
                 maxHour = 6;
+
+                id = "D" + numDia + "-N";
+            }
         }
     }
 }
