@@ -15,6 +15,7 @@ namespace FilmingReneratorSystem
    
         public int totalCost = 0;
         public int hourFilming = 3;    /*filming duration*/
+        public int dayF;
         public Scene(int id)
         {
             this.id = id;

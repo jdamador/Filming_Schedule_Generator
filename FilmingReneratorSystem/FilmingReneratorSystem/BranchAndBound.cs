@@ -18,7 +18,7 @@ namespace FilmingReneratorSystem
         {
             evaluation = new Evaluating(stage);
             listScenes = ShallowClone(stage.scenes); // get all calendars in this stage
-           
+
 
             runBB();
             Console.ReadKey();
@@ -30,11 +30,13 @@ namespace FilmingReneratorSystem
         {
 
             this.notVisited = ShallowClone(listScenes);
-
+            //visited = ShallowClone(listScenes);
+            fillBestCalendar(listScenes);
             goAlgorithm(notVisited);
+
             Console.WriteLine("======== Mejor Escena ======== ");
             seeCombination(bestCalendar.listScenes);
-            Console.WriteLine("Costo: "+bestCalendar.bestCost);
+
             Console.ReadKey();
 
         }
@@ -46,27 +48,21 @@ namespace FilmingReneratorSystem
         {
             if (notVisited.Count == 0)
             {
-                Console.WriteLine("======= Combinacion ======= ");
+                // Imprime rama
                 seeCombination(visited);
-                Console.WriteLine("Costo: " + evaluation.getCostScenes(visited));
-                if (bestCalendar.listScenes.Count == 0)
-                {// no tiene el mejor calendario
-               
-                    changeBestCalendar(visited);
-                    
-                }
-                if (evaluation.getCostScenes(visited) < bestCalendar.bestCost) // Get Cost
+
+                if (evaluation.getCostScenes(visited) < bestCalendar.bestCost) // Check si la rama actual es mejor
                 {
-                    changeBestCalendar(visited);
+                    changeBestCalendar(visited);//cambia
                 }
             }
             else
             {
                 foreach (Scene scene in notVisited)
                 {
-                    
+
                     // Impletation LC-FIFO
-                    if (evaluation.isFactible(visited) == false)
+                    if (evaluation.getCostScenes(visited) > bestCalendar.bestCost)
                     {
                         return;
                     }
@@ -83,7 +79,7 @@ namespace FilmingReneratorSystem
                 }
             }
         }
-       
+
 
         /// <summary>
         /// Change Best Calendar
@@ -105,8 +101,15 @@ namespace FilmingReneratorSystem
             return new List<T>(items);
         }
 
-
-
+        /// <summary>
+        /// Fill the first best calendar
+        /// </summary>
+        /// <param name="listScenes"></param>
+        public void fillBestCalendar(List<Scene> listScenes)
+        {
+            bestCalendar.listScenes = ShallowClone(listScenes);
+            bestCalendar.bestCost = evaluation.getCostScenes(listScenes);
+        }
         public bool isWorkable(Scene scene)
         {
             for (int i = 0; i < scene.listActors.Count; i++)
@@ -121,15 +124,17 @@ namespace FilmingReneratorSystem
         /// <param name="list"></param>
         public void seeCombination(List<Scene> list)
         {
+            Console.WriteLine("");
             Console.WriteLine("$$$$$$$$ ORDENAMIENTO $$$$$$$$");
             string var = "";
             for (int i = 0; i < list.Count; i++)
             {
-                var += list[i].id + " -- ";
+                var += " - " + list[i].id;
             }
             Console.WriteLine(var);
+            Console.WriteLine("COSTO: " + evaluation.getCostScenes(list));
 
         }
-        
+
     }
 }
