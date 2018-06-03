@@ -10,7 +10,8 @@ namespace FilmingReneratorSystem
         private List<Scene> father;
         private List<Scene> mother;
         private Stage stage;
-
+        private Calendar bestOne= new Calendar();
+        private List<Calendar> listaCombinadiones = new List<Calendar>();
         public GeneticAlgorithm(Stage stage)
         {
             this.stage = stage;
@@ -32,10 +33,8 @@ namespace FilmingReneratorSystem
             OrderOne_Crossover orderOne = new OrderOne_Crossover();
             List<Scene> child = orderOne.orderOneCrossover(father, mother);
             Evaluating evaluator = new Evaluating(stage);
-            if (evaluator.isFactible(child))
-            {
+          
 
-            }
         }
         private List<T> ShallowClone<T>(List<T> items)
         {
