@@ -62,11 +62,7 @@ namespace FilmingReneratorSystem
                 {
 
                     // Impletation LC-FIFO
-                    if (!evaluation.isFactible(visited))
-                    {
-                        return;
-                    }
-                    else
+                    if (evaluation.isFactible(visited))
                     {
                         // Generate Combination
                         this.visited.Remove(scene); this.visited.Add(scene);
@@ -74,6 +70,11 @@ namespace FilmingReneratorSystem
                         List<Scene> auxScene = ShallowClone(notVisited);
                         auxScene.Remove(scene);
                         goAlgorithm(auxScene);
+                       
+                    }
+                    else // Poda
+                    {
+                        return;
                     }
 
                 }

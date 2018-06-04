@@ -19,7 +19,7 @@ namespace FilmingReneratorSystem
         public Actor(int id, int cost)
         {
             this.id = id;
-            this.costTotal = cost;
+            this.costXDay = cost;
         }
         public void setDate()
         {

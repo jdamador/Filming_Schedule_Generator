@@ -49,6 +49,7 @@ namespace FilmingReneratorSystem
         /// <param name="listScenes"></param>
         public void setCostScenes(List<Scene> listScenes)
         {
+           
             setCostActors(listScenes); // Saca el costo de cada actor por dia
             // Costo por cada escena
             foreach (Scene scene in stage.scenes)
@@ -71,13 +72,19 @@ namespace FilmingReneratorSystem
                 foreach (Actor actor in listScenes[i].listActors)
                 { // Actors
                     if (isSetActor.Contains(actor)) // if contain,is the first day
-                    {
+                    { 
+
                         actor.lastDay = stage.filmingDays[i]; 
                         actor.costTotal = ((actor.lastDay.numDia - actor.firstDay.numDia) + 1) * actor.costXDay; // Set cost
+                        //Console.WriteLine(actor.lastDay.numDia + " Last day");
+                        Console.WriteLine("Costo:"+ actor.costXDay);
                     }
                     else
                     {
+                        
                         actor.firstDay = actor.lastDay = stage.filmingDays[i];// may be get last day 
+                        isSetActor.Add(actor);
+                       // Console.WriteLine(actor.firstDay.numDia + " First day");
                     }
                 }
             }
