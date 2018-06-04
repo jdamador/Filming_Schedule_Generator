@@ -30,13 +30,11 @@ namespace FilmingReneratorSystem
         {
 
             this.notVisited = ShallowClone(listScenes);
-            visited = ShallowClone(listScenes);
-            fillBestCalendar(listScenes);
             goAlgorithm(notVisited);
 
             Console.WriteLine("======== Mejor Escena ======== ");
             seeCombination(bestCalendar.listScenes);
-
+            Console.WriteLine("COSTO: "+bestCalendar.bestCost);
             Console.ReadKey();
 
         }
@@ -50,9 +48,12 @@ namespace FilmingReneratorSystem
             {
                 // Imprime rama
                 seeCombination(visited);
+                Console.WriteLine("COSTO: " + evaluation.getCostScenes(visited));
 
-                if (evaluation.getCostScenes(visited) < bestCalendar.bestCost) // Check si la rama actual es mejor
+                if (evaluation.getCostScenes(visited) < bestCalendar.bestCost || bestCalendar.bestCost == 0) // Check si la rama actual es mejor
                 {
+                    Console.WriteLine("Entro");
+                    //seeCombination(bestCalendar.listScenes);
                     changeBestCalendar(visited);//cambia
                 }
             }
@@ -64,18 +65,24 @@ namespace FilmingReneratorSystem
                     // Impletation LC-FIFO
                     if (evaluation.isFactible(visited))
                     {
-                        // Generate Combination
-                        this.visited.Remove(scene); this.visited.Add(scene);
+                        //if (evaluation.getCostScenes(visited) > bestCalendar.bestCost)
+                      //  {
+                            // Generate Combination
+                            this.visited.Remove(scene); this.visited.Add(scene);
 
-                        List<Scene> auxScene = ShallowClone(notVisited);
-                        auxScene.Remove(scene);
-                        goAlgorithm(auxScene);
-                       
+                            List<Scene> auxScene = ShallowClone(notVisited);
+                            auxScene.Remove(scene);
+                            goAlgorithm(auxScene);
+                        
+                        //else {
+                        //    continue;
+                        //}
+
                     }
-                    else // Poda
-                    {
-                        return;
-                    }
+                        else // Poda
+                        {
+                            return;
+                        }
 
                 }
             }
@@ -88,8 +95,12 @@ namespace FilmingReneratorSystem
         /// <param name="listScenes"></param>
         public void changeBestCalendar(List<Scene> listScenes)
         {
-            this.bestCalendar.listScenes = listScenes;
-            this.bestCalendar.bestCost = evaluation.getCostScenes(listScenes);
+            //Console.WriteLine("Mejor escenas");
+
+            this.bestCalendar.listScenes = ShallowClone(listScenes);
+            //seeCombination(bestCalendar.listScenes);
+            this.bestCalendar.bestCost = evaluation.getCostScenes(bestCalendar.listScenes);
+            Console.WriteLine("Costo Mejor Escenas: "+bestCalendar.bestCost);
         }
         /// <summary>
         /// Return clone of the list 
@@ -102,15 +113,8 @@ namespace FilmingReneratorSystem
             return new List<T>(items);
         }
 
-        /// <summary>
-        /// Fill the first best calendar
-        /// </summary>
-        /// <param name="listScenes"></param>
-        public void fillBestCalendar(List<Scene> listScenes)
-        {
-            bestCalendar.listScenes = ShallowClone(listScenes);
-            bestCalendar.bestCost = evaluation.getCostScenes(listScenes);
-        }
+
+        
         public bool isWorkable(Scene scene)
         {
             for (int i = 0; i < scene.listActors.Count; i++)
@@ -126,14 +130,14 @@ namespace FilmingReneratorSystem
         public void seeCombination(List<Scene> list)
         {
             Console.WriteLine("");
-            Console.WriteLine("$$$$$$$$ ORDENAMIENTO $$$$$$$$");
+            Console.WriteLine("$$$$$$$$ CALENDARIO $$$$$$$$");
             string var = "";
             for (int i = 0; i < list.Count; i++)
             {
                 var += " - " + list[i].id;
             }
             Console.WriteLine(var);
-            Console.WriteLine("COSTO: " + evaluation.getCostScenes(list));
+            
 
         }
 

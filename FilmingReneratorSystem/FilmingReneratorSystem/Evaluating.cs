@@ -22,7 +22,7 @@ namespace FilmingReneratorSystem
         /// 
         public bool isFactible(List<Scene> listScenes)
         {
-            Console.WriteLine(listScenes.Count);
+            
             //Asignar el dia en que se coloco la escena
             //Asigne the day where has put the scene 
             for (int i = 0; i < listScenes.Count; i++)
@@ -67,41 +67,42 @@ namespace FilmingReneratorSystem
         /// <param name="listScenes"></param>
         public void setCostActors(List<Scene> listScenes)
         {
-<<<<<<< Updated upstream
-            
+
             foreach (Actor a in stage.actors)
             {
                 foreach (Scene s in listScenes)
                 {
                     if (s.listActors.Contains(a))
-=======
-            List<Actor> isSetActor = new List<Actor>();
-            for (int i = 0; i < listScenes.Count; i++)
-            { // Scenes
-                foreach (Actor actor in listScenes[i].listActors)
-                { // Actors
-                    if (isSetActor.Contains(actor)) // if contain,is the first day
-                    { 
-
-                        actor.lastDay = stage.filmingDays[i]; 
-                        actor.costTotal = ((actor.lastDay.numDia - actor.firstDay.numDia) + 1) * actor.costXDay; // Set cost
-                        //Console.WriteLine(actor.lastDay.numDia + " Last day");
-                        //Console.WriteLine("Costo:"+ actor.costXDay);
-                    }
-                    else
->>>>>>> Stashed changes
                     {
-                        if (a.firstDay == null)
-                        {
-                            a.firstDay = s.dayF;
+
+                        List<Actor> isSetActor = new List<Actor>();
+                        for (int i = 0; i < listScenes.Count; i++)
+                        { // Scenes
+                            foreach (Actor actor in listScenes[i].listActors)
+                            { // Actors
+                                if (isSetActor.Contains(actor)) // if contain,is the first day
+                                {
+
+                                    actor.lastDay = stage.filmingDays[i];
+                                    actor.costTotal = ((actor.lastDay.numDia - actor.firstDay.numDia) + 1) *                    actor.costXDay; // Set cost
+                                                                                                                          
+                                }
+                                else
+                                {
+                                    if (a.firstDay == null)
+                                    {
+                                        a.firstDay = s.dayF;
+                                    }
+                                    a.lastDay = s.dayF;
+
+                                }
+                            }
                         }
-                        a.lastDay = s.dayF;
-                        
-                    }       
+                       
+                        a.costTotal = ((a.lastDay.numDia - a.firstDay.numDia) + 1) * a.costXDay; // Set cost
+                    }
                 }
-                Console.WriteLine("Actor: " + a.id);
-                a.costTotal = ((a.lastDay.numDia - a.firstDay.numDia) + 1) * a.costXDay; // Set cost
-            }    
+            }
         }
 
 
@@ -114,12 +115,11 @@ namespace FilmingReneratorSystem
         public int getCostScenes(List<Scene> listScene)
         {
             int finalCostCalendar = 0;
-            for (int i = 0; i < listScene.Count; i++)
+            for (int i = 0; i < stage.actors.Count; i++)
             { // Run Scenes
-                for (int j = 0; j < listScene[i].listActors.Count; j++)
-                { // Run Actors in Scenes
-                    finalCostCalendar += listScene[i].listActors[j].costXDay; // Sums in the finalCost of calendar
-                }
+                foreach(Scene scene in listScene)
+                    if(scene.listActors.Contains(stage.actors[i]))
+                        finalCostCalendar += stage.actors[i].costTotal;
             }
             return finalCostCalendar;
         }
@@ -134,9 +134,9 @@ namespace FilmingReneratorSystem
 
             for (int i = 0; i < scene.listActors.Count; i++)
             { // Run Actors in Scenes
-                finalCostScene += scene.listActors[i].costXDay; // Sums in the finalCost of calendar
+                finalCostScene += scene.listActors[i].costTotal; // Sums in the finalCost of calendar
             }
             return finalCostScene;
         }
     }
-}
+} 
