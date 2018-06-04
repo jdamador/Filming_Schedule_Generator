@@ -12,14 +12,14 @@ namespace FilmingReneratorSystem
         public int id { get; set; }                 /* Identificator*/
         public FilmingDay firstDay { get; set; }    /* First day to start work*/
         public FilmingDay lastDay { get; set; }     /* Last day to end work*/
+        public int costTotal { get; set; }           
         public int costXDay { get; set; }           /* Pay per day*/
-        public int cost { get; set; }
         public List<FilmingDay> available = new List<FilmingDay>();
         public List<FilmingDay> workedDays = new List<FilmingDay>();
         public Actor(int id, int cost)
         {
             this.id = id;
-            this.cost = cost;
+            this.costTotal = cost;
         }
         public void setDate()
         {

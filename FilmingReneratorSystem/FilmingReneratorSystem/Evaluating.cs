@@ -22,7 +22,20 @@ namespace FilmingReneratorSystem
         /// 
         public bool isFactible(List<Scene> listScenes)
         {
-
+            //Asignar el dia en que se coloco la escena
+            //Asigne the day where has put the scene 
+            for (int i = 0; i < listScenes.Count; i++)
+                listScenes[i].dayF = stage.filmingDays[i];
+            for (int i = 1; i < listScenes.Count - 1; i++)
+            {
+                if (listScenes[i].dayF.isDay)
+                    if (!listScenes[i - 1].dayF.isDay)
+                        return false;
+                    else
+                     if (listScenes[i + 1].dayF.isDay)
+                        return false;
+            }
+            setCostScenes(listScenes);
             return true;
         }
 
@@ -42,7 +55,7 @@ namespace FilmingReneratorSystem
             {
                 foreach (Actor actor in scene.listActors)
                 {
-                    scene.totalCost += actor.costXDay;
+                    scene.totalCost += actor.costTotal;
                 }
             }
         }
@@ -52,43 +65,57 @@ namespace FilmingReneratorSystem
         /// <param name="listScenes"></param>
         public void setCostActors(List<Scene> listScenes)
         {
-            
-            
-
-        }
-
-        /// <summary>
-        /// Get the cost of Scenes
-        /// </summary>
-        /// <param name="listScene"></param>
-        /// <returns></returns>
-
-        public int getCostScenes(List<Scene> listScene)
-        {
-            int finalCostCalendar = 0;
-            for (int i = 0; i < listScene.Count; i++)
-            { // Run Scenes
-                for (int j = 0; j < listScene[i].listActors.Count; j++)
-                { // Run Actors in Scenes
-                    finalCostCalendar += listScene[i].listActors[j].costXDay; // Sums in the finalCost of calendar
+            List<Actor> isSetActor = new List<Actor>();
+            for (int i = 0; i < listScenes.Count; i++)
+            { // Scenes
+                foreach (Actor actor in listScenes[i].listActors)
+                { // Actors
+                    if (isSetActor.Contains(actor)) // if contain,is the first day
+                    {
+                        actor.lastDay = stage.filmingDays[i]; 
+                        actor.costTotal = ((actor.lastDay.numDia - actor.firstDay.numDia) + 1) * actor.costXDay; // Set cost
+                    }
+                    else
+                    {
+                        actor.firstDay = actor.lastDay = stage.filmingDays[i];// may be get last day 
+                    }
                 }
             }
-            return finalCostCalendar;
         }
-        /// <summary>
-        /// Get the cost of Scene
-        /// </summary>
-        /// <param name="scene"></param>
-        /// <returns></returns>
-        public int getCostScene(Scene scene)
-        {
-            int finalCostScene = 0;
+    
 
-            for (int i = 0; i < scene.listActors.Count; i++)
+    /// <summary>
+    /// Get the cost of Scenes
+    /// </summary>
+    /// <param name="listScene"></param>
+    /// <returns></returns>
+
+    public int getCostScenes(List<Scene> listScene)
+    {
+        int finalCostCalendar = 0;
+        for (int i = 0; i < listScene.Count; i++)
+        { // Run Scenes
+            for (int j = 0; j < listScene[i].listActors.Count; j++)
             { // Run Actors in Scenes
-                finalCostScene += scene.listActors[i].costXDay; // Sums in the finalCost of calendar
+                finalCostCalendar += listScene[i].listActors[j].costXDay; // Sums in the finalCost of calendar
             }
-            return finalCostScene;
         }
+        return finalCostCalendar;
     }
+    /// <summary>
+    /// Get the cost of Scene
+    /// </summary>
+    /// <param name="scene"></param>
+    /// <returns></returns>
+    public int getCostScene(Scene scene)
+    {
+        int finalCostScene = 0;
+
+        for (int i = 0; i < scene.listActors.Count; i++)
+        { // Run Actors in Scenes
+            finalCostScene += scene.listActors[i].costXDay; // Sums in the finalCost of calendar
+        }
+        return finalCostScene;
+    }
+}
 }

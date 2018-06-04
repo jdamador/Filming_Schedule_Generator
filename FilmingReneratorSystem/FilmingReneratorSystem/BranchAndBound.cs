@@ -62,7 +62,7 @@ namespace FilmingReneratorSystem
                 {
 
                     // Impletation LC-FIFO
-                    if (evaluation.getCostScenes(visited) > bestCalendar.bestCost)
+                    if (!evaluation.isFactible(visited))
                     {
                         return;
                     }
