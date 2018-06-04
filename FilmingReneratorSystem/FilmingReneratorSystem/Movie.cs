@@ -277,8 +277,9 @@ namespace FilmingReneratorSystem
         }
         public void imprimir()
         {
-            foreach (Stage a in stages)
-            {
+            //foreach (Stage a in stages)
+            //{
+            Stage a = stages[0];
                 Console.WriteLine("*********************** Escenario #" + a.idStage + "***********************");
                 foreach (Scene b in a.scenes)
                 {
@@ -299,7 +300,7 @@ namespace FilmingReneratorSystem
 
 
                 }
-            }
+           // }
 
 
         }

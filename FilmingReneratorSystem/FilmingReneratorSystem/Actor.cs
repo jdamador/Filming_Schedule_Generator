@@ -10,8 +10,8 @@ namespace FilmingReneratorSystem
     {
         /***********All variable declarations here********/
         public int id { get; set; }                 /* Identificator*/
-        public FilmingDay firstDay { get; set; }    /* First day to start work*/
-        public FilmingDay lastDay { get; set; }     /* Last day to end work*/
+        public FilmingDay firstDay = null;   /* First day to start work*/
+        public FilmingDay lastDay = null;    /* Last day to end work*/
         public int costTotal { get; set; }           
         public int costXDay { get; set; }           /* Pay per day*/
         public List<FilmingDay> available = new List<FilmingDay>();

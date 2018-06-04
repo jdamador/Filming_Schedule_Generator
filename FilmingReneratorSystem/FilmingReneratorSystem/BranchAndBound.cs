@@ -30,7 +30,7 @@ namespace FilmingReneratorSystem
         {
 
             this.notVisited = ShallowClone(listScenes);
-            //visited = ShallowClone(listScenes);
+            visited = ShallowClone(listScenes);
             fillBestCalendar(listScenes);
             goAlgorithm(notVisited);
 
