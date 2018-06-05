@@ -61,7 +61,7 @@ namespace FilmingReneratorSystem
             for (int i = 0; i < 4; i++)
                 for (int j = 0; j < list[i]; j++)
                 {
-                    stages[i].actors.Add(new Actor(j + 1, j+50));
+                    stages[i].actors.Add(new Actor(j + 1, j+5000/2));
                 }
         }
         /// <summary>

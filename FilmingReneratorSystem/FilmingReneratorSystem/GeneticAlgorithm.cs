@@ -7,39 +7,45 @@ namespace FilmingReneratorSystem
 {
     class GeneticAlgorithm
     {
+        /*All varables declaration  here*/
         private List<Scene> father;
         private List<Scene> mother;
         private Stage stage;
         private Calendar bestOne= new Calendar();
-        private List<Calendar> listaCombinadiones = new List<Calendar>();
+        private Evaluating evaluating;
+        //Recieve a stage to calculate the best cost
         public GeneticAlgorithm(Stage stage)
         {
             this.stage = stage;
             generateStartPopulation();
-            orderOne_crossover();
+         
         }
-        /// <summary>
-        /// Generate start population
-        /// </summary>
+      
+        /********************** All methods here *************************/
+
+        /****************** Generar la población inicial***********************/
         public void generateStartPopulation()
         {
             father = stage.scenes;
-            List<Scene> aux = ShallowClone(stage.scenes);
+            List<Scene> aux = evaluating.shallowClone(stage.scenes); //pasar evaluating
             aux.Reverse();
-            mother = aux;
+            mother = aux; 
         }
-        public void orderOne_crossover()
-        {
-            OrderOne_Crossover orderOne = new OrderOne_Crossover();
-            List<Scene> child = orderOne.orderOneCrossover(father, mother);
-            Evaluating evaluator = new Evaluating(stage);
+       
+        /************************** Evaluacion*************************************/
+        //Seteo de costos padres e hijos (not null) 
+        // Verificación si se encontro el mejor costo
           
+        /************************** Seleccion  ************************************/
+        // Verificar cuales dos de  los cuatro descendientes tienen el mejor costo
 
-        }
-        private List<T> ShallowClone<T>(List<T> items)
-        {
-            return new List<T>(items);
+       /***************************  Crossover    **********************************/
+       //Envia padres, retorna dos hijos.
 
-        }
+       /******************************   Mutación ***********************************/
+       //Se intercambia una posición con otra
+
+       /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
+       //evaluar;
     }
 }
