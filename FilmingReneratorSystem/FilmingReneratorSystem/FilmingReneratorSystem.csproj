@@ -45,6 +45,7 @@
     <Compile Include="Actor.cs" />
     <Compile Include="BranchAndBound.cs" />
     <Compile Include="Calendar.cs" />
+    <Compile Include="Cycle_Crossover.cs" />
     <Compile Include="Evaluating.cs" />
     <Compile Include="FilmingDay.cs" />
     <Compile Include="GeneticAlgorithm.cs" />

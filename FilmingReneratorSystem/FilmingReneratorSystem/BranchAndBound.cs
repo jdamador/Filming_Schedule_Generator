@@ -64,8 +64,7 @@ namespace FilmingReneratorSystem
             {
                 foreach(Scene scene in notVisited)
                 {
-                    evaluation.seeCombination(visited);
-                    Console.WriteLine("Costo: " + evaluation.getCostScenes(visited));
+                   
                     // Impletation LC-FIFO
                     if (evaluation.getCostScenes(visited) > bestCalendar.bestCost)
                         return;
