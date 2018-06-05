@@ -8,12 +8,15 @@ namespace FilmingReneratorSystem
 {
     class Evaluating
     {
+        #region Region to create Information
         List<Actor> listActorModifiedDay = new List<Actor>(); // List to know which actors already modified
         Stage stage;
         public Evaluating(Stage stage)
         {
             this.stage = stage;
         }
+        #endregion
+        #region Region to Check if is Factible
         /// <summary>
         /// Check if scenes are factible and set Actors 
         /// </summary>
@@ -39,11 +42,8 @@ namespace FilmingReneratorSystem
             //setCostScenes(listScenes);
             return true;
         }
-
-
-
-
-
+        #endregion
+        #region Region to set and get CostScenes or CostScene
         /// <summary>
         /// Set Cost all Scenes of calendar
         /// </summary>
@@ -125,7 +125,8 @@ namespace FilmingReneratorSystem
             }
             return finalCostScene;
         }
-
+        #endregion
+        #region Region to clone list
         /// <summary>
         /// Return clone of the list 
         /// </summary>
@@ -136,6 +137,7 @@ namespace FilmingReneratorSystem
         {
             return new List<T>(items);
         }
+        #endregion
         #region See Calendar
         /// <summary>
         /// See Combination 
