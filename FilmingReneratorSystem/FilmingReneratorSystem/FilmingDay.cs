@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FilmingReneratorSystem
 {
-    class FilmingDay
+    public class FilmingDay
     {
         //Filming day are all day available to film this movie
 
