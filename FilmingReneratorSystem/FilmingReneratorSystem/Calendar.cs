@@ -9,7 +9,7 @@ namespace FilmingReneratorSystem
     class Calendar
     {
         public List<Scene> listScenes = new List<Scene>();
-        public int bestCost = 0; // Cost 
+        public int bestCost = int.MaxValue; // Cost 
 
         
     }

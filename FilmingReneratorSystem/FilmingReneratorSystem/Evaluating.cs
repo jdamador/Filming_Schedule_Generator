@@ -36,7 +36,7 @@ namespace FilmingReneratorSystem
                      if (listScenes[i + 1].dayF.isDay)
                         return false;
             }
-            setCostScenes(listScenes);
+            //setCostScenes(listScenes);
             return true;
         }
 
@@ -50,7 +50,6 @@ namespace FilmingReneratorSystem
         /// <param name="listScenes"></param>
         public void setCostScenes(List<Scene> listScenes)
         {
-
             setCostActors(listScenes); // Saca el costo de cada actor por dia
             // Costo por cada escena
             foreach (Scene scene in stage.scenes)
@@ -61,45 +60,32 @@ namespace FilmingReneratorSystem
                 }
             }
         }
+
         /// <summary>
         /// Set Cost for Actor 
         /// </summary>
         /// <param name="listScenes"></param>
+        
         public void setCostActors(List<Scene> listScenes)
         {
-
-            foreach (Actor a in stage.actors)
-            {
-                foreach (Scene s in listScenes)
-                {
-                    if (s.listActors.Contains(a))
+            List<Actor> isSetActor = new List<Actor>();
+            for (int i = 0; i < listScenes.Count; i++)
+            { // Scenes
+                foreach (Actor actor in listScenes[i].listActors)
+                { // Actors
+                    if (isSetActor.Contains(actor)) // if contain,is the first day
                     {
 
-                        List<Actor> isSetActor = new List<Actor>();
-                        for (int i = 0; i < listScenes.Count; i++)
-                        { // Scenes
-                            foreach (Actor actor in listScenes[i].listActors)
-                            { // Actors
-                                if (isSetActor.Contains(actor)) // if contain,is the first day
-                                {
-
-                                    actor.lastDay = stage.filmingDays[i];
-                                    actor.costTotal = ((actor.lastDay.numDia - actor.firstDay.numDia) + 1) *                    actor.costXDay; // Set cost
-                                                                                                                          
-                                }
-                                else
-                                {
-                                    if (a.firstDay == null)
-                                    {
-                                        a.firstDay = s.dayF;
-                                    }
-                                    a.lastDay = s.dayF;
-
-                                }
-                            }
-                        }
+                        actor.lastDay = stage.filmingDays[i];
+                        actor.costTotal = ((actor.lastDay.numDia - actor.firstDay.numDia) + 1) * actor.costXDay; // Set cost
                        
-                        a.costTotal = ((a.lastDay.numDia - a.firstDay.numDia) + 1) * a.costXDay; // Set cost
+                    }
+                    else
+                    {
+
+                        actor.firstDay = actor.lastDay = stage.filmingDays[i];// may be get last day 
+                        isSetActor.Add(actor);
+                        
                     }
                 }
             }
@@ -114,12 +100,13 @@ namespace FilmingReneratorSystem
 
         public int getCostScenes(List<Scene> listScene)
         {
+            setCostScenes(listScene);
             int finalCostCalendar = 0;
             for (int i = 0; i < stage.actors.Count; i++)
             { // Run Scenes
                 foreach(Scene scene in listScene)
-                    if(scene.listActors.Contains(stage.actors[i]))
-                        finalCostCalendar += stage.actors[i].costTotal;
+                    finalCostCalendar += stage.actors[i].costTotal;
+                 
             }
             return finalCostCalendar;
         }
@@ -138,5 +125,36 @@ namespace FilmingReneratorSystem
             }
             return finalCostScene;
         }
+
+        /// <summary>
+        /// Return clone of the list 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public List<T> shallowClone<T>(List<T> items)
+        {
+            return new List<T>(items);
+        }
+        #region See Calendar
+        /// <summary>
+        /// See Combination 
+        /// </summary>
+        /// <param name="list"></param>
+        public void seeCombination(List<Scene> list)
+        {
+            Console.WriteLine("");
+            Console.WriteLine("$$$$$$$$ CALENDARIO $$$$$$$$");
+            string line = "";
+            foreach (Scene scene in list)
+            {
+                line += scene.id + " ";
+            }
+            Console.WriteLine(line);
+
+        }
+
+        
+        #endregion
     }
 } 
