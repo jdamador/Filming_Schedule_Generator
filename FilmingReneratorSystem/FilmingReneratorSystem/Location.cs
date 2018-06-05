@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FilmingReneratorSystem
 {
-    class Location
+    public class Location
     {
         /***********All variable declarations here********/
         public int id { get; set; }

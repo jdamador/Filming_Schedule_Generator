@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FilmingReneratorSystem
 {
-    class Scene
+    public class Scene
     {
         /***********All variable declarations here********/
         public int id;
