@@ -23,6 +23,7 @@ namespace FilmingReneratorSystem
         public GeneticAlgorithm(Stage stage)
         {
             this.stage = stage;
+            evaluating = new Evaluating(stage);
             generateStartPopulation();
             
         }
@@ -62,12 +63,14 @@ namespace FilmingReneratorSystem
             family.Add(father);family.Add(mother);
             if (sonOne != null || sonTwo != null) { family.Add(sonOne); family.Add(sonTwo);}
             foreach (List<Scene> actual in family) {
-                if (evaluating.getCostScenes(actual) < bestOne.bestCost){
+                if (evaluating.getCostScenes(actual) <= bestOne.bestCost){
                     changeBestOne(actual);
                     newFather = evaluating.shallowClone(bestOne.listScenes);
+                    
                 }
                 
             }
+           
             selection(family);
             // Cruces 
 
@@ -80,13 +83,19 @@ namespace FilmingReneratorSystem
         /// </summary>
         private void selection(List<List<Scene>> family){
             foreach(List<Scene> actual in family)
-                if (!bestOne.listScenes.Equals(actual))
-                    foreach(List<Scene> parent in family) {
-                        if (evaluating.getCostScenes(actual) < evaluating.getCostScenes(parent)) {
-                            if (newMother.Count == 0 || evaluating.getCostScenes(actual) < evaluating.getCostScenes(newMother))
-                                newMother = evaluating.shallowClone(actual);
-                        }
-                    }
+                if (!bestOne.listScenes.Equals(actual)) { 
+
+                    if (newMother.Count == 0 || evaluating.getCostScenes(actual) < evaluating.getCostScenes(newMother))
+                        newMother = evaluating.shallowClone(actual);
+                    
+                }
+            Console.WriteLine("New Madre:");
+            evaluating.seeCombination(newMother);
+            Console.WriteLine(evaluating.getCostScenes(newMother));
+            Console.WriteLine("New Padre:");
+            evaluating.seeCombination(newFather);
+            Console.WriteLine(evaluating.getCostScenes(newFather));
+            //Crossover();
         }
         #endregion
 
@@ -99,7 +108,15 @@ namespace FilmingReneratorSystem
 
         /***************************  Crossover    **********************************/
         //Envia padres, retorna dos hijos.
+        private void Crossover()
+        {
+            
+            sonOne = new OrderOne_Crossover().orderOneCrossover(newMother,newFather);
+            sonTwo = new OrderOne_Crossover().orderOneCrossover(newFather, newMother);
 
+            imprimir(sonOne);
+            imprimir(sonTwo);
+        }
         #region Mutation
         public List<Scene> mutation(List<Scene> listMutation) {
             Scene worst = null;
@@ -125,5 +142,18 @@ namespace FilmingReneratorSystem
         }
         #endregion
         #endregion
+
+
+
+
+        public void imprimir(List<Scene> e)
+        {
+            Console.WriteLine("Combinacion del algoritmo genetico");
+            foreach (Scene i in e)
+            {
+                Console.Write(i.id + "-");
+            }
+            Console.WriteLine();
+        }
     }
 }

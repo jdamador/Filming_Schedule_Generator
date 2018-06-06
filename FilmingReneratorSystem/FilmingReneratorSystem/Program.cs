@@ -11,7 +11,9 @@ namespace FilmingReneratorSystem
         static void Main(String[] ar)
         {
             Movie movie = new Movie();
+            new GeneticAlgorithm(movie.stages[1]);
             new BranchAndBound(movie.stages[3]);
+           
         }
     }
 }
