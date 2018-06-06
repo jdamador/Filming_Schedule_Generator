@@ -24,10 +24,10 @@ namespace FilmingReneratorSystem
 	 */
         public List<Scene> orderOneCrossover(List<Scene> parent1, List<Scene> parent2)
         {
-            int l = parent1.Count;
+            int l = parent1.Count-1;
             //get 2 random ints between 0 and size of array
-            int r1 = l / 2 - 2;
-            int r2 = l / 2 + 2;
+            int r1 = l / 2 - 1;
+            int r2 = l / 2 + 1;
             //to make sure the r1 < r2
 
             //create the child .. initial elements are -1
@@ -37,6 +37,8 @@ namespace FilmingReneratorSystem
             //copy elements between r1, r2 from parent1 into child
             for (int i = r1; i <= r2; i++)
             {
+                Console.WriteLine("i " + i );
+                Console.WriteLine("P " + parent1.Count);
                 child[i] = parent1[i];
             }
 

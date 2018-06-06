@@ -25,7 +25,7 @@ namespace FilmingReneratorSystem
             setStage2();
             setStage3();
             setStage4();
-            imprimir();
+            //imprimir();
 
         }
         /**************************** CREATE LISTS **************************************/
