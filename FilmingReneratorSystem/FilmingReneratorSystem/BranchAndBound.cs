@@ -9,9 +9,10 @@ namespace FilmingReneratorSystem
     class BranchAndBound
     {
         #region Region to create Information
-        public List<Scene> visited = new List<Scene>();    // Lista de nodos visitados
-        public List<Scene> notVisited = new List<Scene>(); // Lista de nodos vivos        
+        public List<Scene> visited = new List<Scene>();    // List visited
+        public List<Scene> notVisited = new List<Scene>(); // List notVisited   
         public Calendar bestCalendar = new Calendar();
+        public int asig=0;public int comp=0; //Asig and Comp
         public Evaluating evaluation; // Contiene algunos metodos para validar
         #endregion
         #region Region to start B&B
@@ -38,7 +39,9 @@ namespace FilmingReneratorSystem
             goAlgorithm(notVisited); // Go B&B
 
             seeBestCalendar(); // see Best Calendar
-           
+
+            seeEmpirical();
+
             Console.ReadKey();
 
         }
@@ -50,30 +53,34 @@ namespace FilmingReneratorSystem
         /// <param name="NotVisited"></param>
         public void goAlgorithm(List<Scene> notVisited)
         {
-            if (notVisited.Count == 0)
+            comp++;
+            if (notVisited.Count == 0) 
             {
-                evaluation.seeCombination(visited);
-                Console.WriteLine("Costo: "+evaluation.getCostScenes(visited));
-                if(evaluation.isFactible(visited))
-                    if (evaluation.getCostScenes(visited) < bestCalendar.bestCost ) 
-                    {
-                        changeBestCalendar(visited); 
-                    }
+                comp++;
+                if (evaluation.getCostScenes(visited) < bestCalendar.bestCost ) 
+                {
+                    changeBestCalendar(visited); 
+                }
             }
             else
             {
                 foreach(Scene scene in notVisited)
                 {
-                   
+                    asig++;
+                    // Print Branch
+                    evaluation.seeCombination(visited);
+                    Console.WriteLine("Costo: " + evaluation.getCostScenes(visited));
+                    comp++;
                     // Impletation LC-FIFO
                     if (evaluation.getCostScenes(visited) > bestCalendar.bestCost)
+                    {
                         return;
-
-                    // Generate Combination
-                    this.visited.Remove(scene); this.visited.Add(scene);
-
-                    List<Scene> auxScene = evaluation.shallowClone(notVisited);
-                    auxScene.Remove(scene);
+                    }
+                    //Generate Combination
+                    this.visited.Remove(scene); this.visited.Add(scene); asig += 2;
+                    List<Scene> auxScene = evaluation.shallowClone(notVisited); asig++;
+                    auxScene.Remove(scene); asig++;
+                    asig += evaluation.asig; comp += evaluation.comp;
                     goAlgorithm(auxScene);
                 }
             }
@@ -97,6 +104,14 @@ namespace FilmingReneratorSystem
             Console.WriteLine("========= Mejor Calendario ========= ");
             evaluation.seeCombination(bestCalendar.listScenes);
             Console.WriteLine("COSTO: " + bestCalendar.bestCost);
+        }
+        /// <summary>
+        /// See Measurement Empirical 
+        /// </summary>
+        public void seeEmpirical() {
+            Console.WriteLine("Cantidad de Asignaciones: " + asig);
+            Console.WriteLine("Cantidad de Comparaciones: "+comp);
+            asig = 0; comp = 0;
         }
         #endregion
 

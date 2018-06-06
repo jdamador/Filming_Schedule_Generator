@@ -11,6 +11,7 @@ namespace FilmingReneratorSystem
         #region Region to create Information
         List<Actor> listActorModifiedDay = new List<Actor>(); // List to know which actors already modified
         Stage stage;
+        public int asig = 0; public int comp = 0;
         public Evaluating(Stage stage)
         {
             this.stage = stage;
@@ -54,9 +55,11 @@ namespace FilmingReneratorSystem
             // Costo por cada escena
             foreach (Scene scene in stage.scenes)
             {
+                asig++;
                 foreach (Actor actor in scene.listActors)
                 {
-                    scene.totalCost += actor.costTotal;
+                    asig++;
+                    scene.totalCost += actor.costTotal; asig++;
                 }
             }
         }
@@ -68,23 +71,29 @@ namespace FilmingReneratorSystem
         
         public void setCostActors(List<Scene> listScenes)
         {
-            List<Actor> isSetActor = new List<Actor>();
+            List<Actor> isSetActor = new List<Actor>();  asig++;
+            asig++;
+            comp++;
             for (int i = 0; i < listScenes.Count; i++)
             { // Scenes
+                comp++;asig++;
+
                 foreach (Actor actor in listScenes[i].listActors)
                 { // Actors
+                    asig++;
+                    comp++;
                     if (isSetActor.Contains(actor)) // if contain,is the first day
                     {
 
-                        actor.lastDay = stage.filmingDays[i];
-                        actor.costTotal = ((actor.lastDay.numDia - actor.firstDay.numDia) + 1) * actor.costXDay; // Set cost
+                        actor.lastDay = stage.filmingDays[i]; asig++;
+                        actor.costTotal = ((actor.lastDay.numDia - actor.firstDay.numDia) + 1) * actor.costXDay;asig++; // Set cost
                        
                     }
                     else
                     {
 
-                        actor.firstDay = actor.lastDay = stage.filmingDays[i];// may be get last day 
-                        isSetActor.Add(actor);
+                        actor.firstDay = actor.lastDay = stage.filmingDays[i];asig++; // may be get last day 
+                        isSetActor.Add(actor); asig++;
                         
                     }
                 }
@@ -100,14 +109,20 @@ namespace FilmingReneratorSystem
 
         public int getCostScenes(List<Scene> listScene)
         {
+            asig = 0;comp = 0;
             setCostScenes(listScene);
-            int finalCostCalendar = 0;
+            int finalCostCalendar = 0; asig++;
+            asig++; comp++;
             for (int i = 0; i < stage.actors.Count; i++)
             { // Run Scenes
-                foreach(Scene scene in listScene)
-                    finalCostCalendar += stage.actors[i].costTotal;
-                 
+                asig++;
+                foreach(Scene scene in listScene) {
+                    asig++;
+                    finalCostCalendar += stage.actors[i].costTotal; asig++;
+                }
+
             }
+            asig++;
             return finalCostCalendar;
         }
         /// <summary>
@@ -135,6 +150,7 @@ namespace FilmingReneratorSystem
         /// <returns></returns>
         public List<T> shallowClone<T>(List<T> items)
         {
+            asig++;
             return new List<T>(items);
         }
         #endregion
@@ -146,7 +162,7 @@ namespace FilmingReneratorSystem
         public void seeCombination(List<Scene> list)
         {
             Console.WriteLine("");
-            Console.WriteLine("$$$$$$$$ CALENDARIO $$$$$$$$");
+            Console.WriteLine("#-#-#-#-#-#-#-#-#-# CALENDARIO #-#-#-#-#-#-#-#-#-#");
             string line = "";
             foreach (Scene scene in list)
             {
