@@ -56,20 +56,25 @@ namespace FilmingReneratorSystem
             comp++;
             if (notVisited.Count == 0) 
             {
+                evaluation.seeCombination(visited);
+                Console.WriteLine("Costo: " + evaluation.getCostScenes(visited));
                 comp++;
-                if (evaluation.getCostScenes(visited) < bestCalendar.bestCost ) 
-                {
-                    changeBestCalendar(visited); 
+                if (evaluation.isFactible(visited)) {
+                    asig += evaluation.asig; comp += evaluation.comp;
+                    if (evaluation.getCostScenes(visited) < bestCalendar.bestCost ) 
+                    {
+                        asig += evaluation.asig;  comp += evaluation.comp;
+                        changeBestCalendar(visited);
+                        return;
+                    }
+                    asig += evaluation.asig; comp += evaluation.comp;
                 }
             }
-            else
-            {
                 foreach(Scene scene in notVisited)
                 {
                     asig++;
                     // Print Branch
-                    evaluation.seeCombination(visited);
-                    Console.WriteLine("Costo: " + evaluation.getCostScenes(visited));
+                   
                     comp++;
                     // Impletation LC-FIFO
                     if (evaluation.getCostScenes(visited) > bestCalendar.bestCost)
@@ -83,7 +88,7 @@ namespace FilmingReneratorSystem
                     asig += evaluation.asig; comp += evaluation.comp;
                     goAlgorithm(auxScene);
                 }
-            }
+            
         }
         #endregion
         #region Change Best Calendar

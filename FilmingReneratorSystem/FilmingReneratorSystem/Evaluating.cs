@@ -9,9 +9,10 @@ namespace FilmingReneratorSystem
     class Evaluating
     {
         #region Region to create Information
+        public int asig = 0; public int comp = 0;
         List<Actor> listActorModifiedDay = new List<Actor>(); // List to know which actors already modified
         Stage stage;
-        public int asig = 0; public int comp = 0;
+        
         public Evaluating(Stage stage)
         {
             this.stage = stage;
@@ -26,19 +27,29 @@ namespace FilmingReneratorSystem
         /// 
         public bool isFactible(List<Scene> listScenes)
         {
-            
+            asig = 0; comp = 0;
             //Asignar el dia en que se coloco la escena
             //Asigne the day where has put the scene 
-            for (int i = 0; i < listScenes.Count; i++)
-                listScenes[i].dayF = stage.filmingDays[i];
+            asig++; comp++;
+            for (int i = 0; i < listScenes.Count; i++) {
+                comp++; asig++;
+                listScenes[i].dayF = stage.filmingDays[i];asig++;
+            }
+            asig++; comp++;
             for (int i = 1; i < listScenes.Count - 1; i++)
             {
-                if (listScenes[i].dayF.isDay)
+                asig++; comp++;
+                comp++;
+                if (listScenes[i].dayF.isDay) {
+                    comp++;
                     if (!listScenes[i - 1].dayF.isDay)
                         return false;
-                    else
+                    else {
+                        comp++;
                      if (listScenes[i + 1].dayF.isDay)
                         return false;
+                    }
+                }
             }
             //setCostScenes(listScenes);
             return true;

@@ -38,10 +38,14 @@ namespace FilmingReneratorSystem
             List<Scene> aux = evaluating.shallowClone(stage.scenes); //pasar evaluating
             aux.Reverse();
             mother = aux;
-            setCost();
+            evaluation();
         }
         #endregion
+
         #region Evaluating
+        public void evaluation() {
+            setCost();
+        }
         /************************** Evaluacion*************************************/
         //Seteo de costos padres e hijos (not null) 
         private void setCost() {
@@ -95,7 +99,7 @@ namespace FilmingReneratorSystem
             Console.WriteLine("New Padre:");
             evaluating.seeCombination(newFather);
             Console.WriteLine(evaluating.getCostScenes(newFather));
-            //Crossover();
+            Crossover();
         }
         #endregion
 

@@ -11,15 +11,17 @@ namespace FilmingReneratorSystem
         static void Main(String[] ar)
         {
             Movie movie = new Movie();
-           // new GeneticAlgorithm(movie.stages[1]);
+            new GeneticAlgorithm(movie.stages[1]);
 
-           // Call Branch and Bound
-            for(int i =0; i < movie.stages.Count; i++) {
+
+            // Call Branch and Bound
+            for (int i = 0; i < movie.stages.Count; i++)
+            {
                 Console.WriteLine("");
-                Console.WriteLine("|o|o|o|o|o|o|o|o|o|o|o|o|o|o|o|o|o| ESCENARIO " + (i+1)+ " |o|o|o|o|o|o|o|o|o|o|o|o|o|o|o|o|o|");
+                Console.WriteLine("|o|o|o|o|o|o|o|o|o|o|o|o|o|o|o|o|o| ESCENARIO " + (i + 1) + " |o|o|o|o|o|o|o|o|o|o|o|o|o|o|o|o|o|");
                 new BranchAndBound(movie.stages[i]);
             }
-
+            Console.ReadKey();
         }
     }
 }
