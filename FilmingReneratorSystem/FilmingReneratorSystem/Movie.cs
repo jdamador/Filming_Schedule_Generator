@@ -25,7 +25,7 @@ namespace FilmingReneratorSystem
             setStage2();
             setStage3();
             setStage4();
-            imprimir();
+            //imprimir();
 
         }
         /**************************** CREATE LISTS **************************************/
@@ -131,7 +131,7 @@ namespace FilmingReneratorSystem
             stages[0].scenes[2].listActors.Add(stages[0].actors[4]);
             //Escenea 4
             stages[0].scenes[3].listActors.Add(stages[0].actors[0]);
-            stages[0].scenes[3].listActors.Add(stages[0].actors[5]);
+            stages[0].scenes[3].listActors.Add(stages[0].actors[4]);
             #endregion
         }
         public void setStage2()

@@ -24,7 +24,7 @@ namespace FilmingReneratorSystem
         {
             evaluation = new Evaluating(stage);
             notVisited = evaluation.shallowClone(stage.scenes);
-           
+            //visited = evaluation.shallowClone(stage.scenes);
             runBB();
             
         }
@@ -34,8 +34,8 @@ namespace FilmingReneratorSystem
         /// </summary>
         public void runBB()
         {
+      
 
-            
             goAlgorithm(notVisited); // Go B&B
 
            // seeBestCalendar(); // see Best Calendar
@@ -56,7 +56,8 @@ namespace FilmingReneratorSystem
            // comp++;
             if (notVisited.Count == 0) 
             {
-                if (evaluation.isFactible(visited)) {
+               
+              //  if (evaluation.isFactible(visited)) {
 
                     evaluation.seeCombination(visited);
                     //Console.WriteLine("Costo: "+evaluation.getCostScenes(visited));
@@ -64,16 +65,16 @@ namespace FilmingReneratorSystem
                         changeBestCalendar(visited);
                     }
                     
-                }
+              //  }
             }
             else
                 foreach(Scene scene in notVisited)
                 {
-                    if (evaluation.getCostCalendar(visited) >= bestCalendar.bestCost)
-                    {
-                        Console.ReadKey();
-                        return;
-                    }
+                    //if (evaluation.getCostCalendar(visited) >= bestCalendar.bestCost)
+                    //{
+                    //    Console.ReadKey();
+                    //    return;
+                    //}
                     this.visited.Remove(scene); this.visited.Add(scene); asig += 2;
                     List<Scene> auxScene = evaluation.shallowClone(notVisited); asig++;
                     auxScene.Remove(scene); asig++;
