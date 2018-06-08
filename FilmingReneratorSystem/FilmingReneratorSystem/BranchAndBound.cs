@@ -38,9 +38,9 @@ namespace FilmingReneratorSystem
 
             goAlgorithm(notVisited); // Go B&B
 
-           // seeBestCalendar(); // see Best Calendar
+            seeBestCalendar(); // see Best Calendar
 
-          //  seeEmpirical();
+            //  seeEmpirical();
 
             Console.ReadKey();
 
@@ -56,23 +56,23 @@ namespace FilmingReneratorSystem
            // comp++;
             if (notVisited.Count == 0) 
             {
-               
-              //  if (evaluation.isFactible(visited)) {
+
+                if (evaluation.isFactible(visited))
+                {
 
                     evaluation.seeCombination(visited);
-                    //Console.WriteLine("Costo: "+evaluation.getCostScenes(visited));
-                    if (evaluation.getCostCalendar(visited) < bestCalendar.bestCost) {
+                    Console.WriteLine("Costo: " + evaluation.getCostCalendar(visited));
+                    if (evaluation.getCostCalendar(visited) <= bestCalendar.bestCost) {
                         changeBestCalendar(visited);
                     }
-                    
-              //  }
+
+                }
             }
             else
                 foreach(Scene scene in notVisited)
                 {
                     //if (evaluation.getCostCalendar(visited) >= bestCalendar.bestCost)
                     //{
-                    //    Console.ReadKey();
                     //    return;
                     //}
                     this.visited.Remove(scene); this.visited.Add(scene); asig += 2;

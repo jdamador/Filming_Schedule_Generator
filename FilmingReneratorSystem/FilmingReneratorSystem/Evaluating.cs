@@ -98,12 +98,11 @@ namespace FilmingReneratorSystem
         private void setCostActores(List<Scene> scenes)
         {
             foreach (Actor a in stage.actors)
-            {
-                Console.WriteLine("Actor ");
- 
+            { 
                  bool asigned=false;
                 foreach (Scene e in scenes)
                 {
+                    
                     if (e.listActors.Contains(a) )
                     {
                         if (!asigned) {

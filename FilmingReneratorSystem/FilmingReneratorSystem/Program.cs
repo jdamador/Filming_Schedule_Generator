@@ -18,7 +18,7 @@ namespace FilmingReneratorSystem
                 Console.WriteLine("");
                 movie = new Movie();
             //Console.WriteLine("|o|o|o|o|o|o|o|o|o|o|o|o|o|o|o|o|o| ESCENARIO " + (i + 1) + " |o|o|o|o|o|o|o|o|o|o|o|o|o|o|o|o|o|");
-             new BranchAndBound(movie.stages[0]);
+             new BranchAndBound(movie.stages[3]);
             //}
             Console.ReadKey();
             //stimateCosts();

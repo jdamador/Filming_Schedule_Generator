@@ -44,7 +44,7 @@ namespace FilmingReneratorSystem
         /// </summary>
         public void createScenes()
         {
-            int[] list = { 4, 5, 7, 8 };
+            int[] list = { 4, 5, 6, 7 };
             for (int i = 0; i <4; i++)
                 for (int j = 0; j < list[i]; j++)
                 {
@@ -57,8 +57,8 @@ namespace FilmingReneratorSystem
         /// </summary>
         public void createActores()
         {
-            int[] list = { 5, 6, 8, 9 };
-            int[] precios = { 200, 50, 100, 500, 25,75,150,125,175,250,275,24};
+            int[] list = { 5, 6, 7, 8};
+            int[] precios = { 200, 50, 100, 500,125,75,150,125,175,250,275,24};
             for (int i = 0; i < 4; i++)
                 for (int j = 0; j < list[i]; j++)
                 {
@@ -70,7 +70,7 @@ namespace FilmingReneratorSystem
         /// </summary>
         public void createLocalidades()
         {
-            int[] list = {4,5,7,8 };
+            int[] list = {4,5,6,7};
             for (int i = 0; i < 4; i++)
                 for (int j = 0; j <list[i]; j++)
                 {
@@ -84,14 +84,13 @@ namespace FilmingReneratorSystem
         {
             /********************** Stage Number 1*********************/
             bool[] daysA = { true, false, false, true, true, false, false, true, true, false, false };
-            int[] days = { 4, 5, 7, 8 };
+            int[] days = { 4, 5, 6, 7 };
             for (int i = 0; i < days.Length; i++)
             {
                 for (int j = 1; j <= days[i]; j++)
                 {
                     stages[i].filmingDays.Add(new FilmingDay(daysA[j], j));
                 }
-               
             }
 
 
@@ -136,140 +135,133 @@ namespace FilmingReneratorSystem
         }
         public void setStage2()
         {
-            /******************* Dias en Actores **********************/
-            //Actor 1
-            stages[1].actors[0].available = stages[1].filmingDays;
-            //Actor 2
-            stages[1].actors[1].available = stages[1].filmingDays;
-            //Actor 3
-            stages[1].actors[2].available = stages[1].filmingDays;
+            #region Asignar dias de filmacion
+            foreach (Actor item in stages[1].actors)
+            {
+                item.available = stages[1].filmingDays;
+            }
+            #endregion
 
-            //*************** Dias en Localidades**********************/
-            //Localidad 1
-            stages[1].locations[0].times = stages[1].filmingDays;
-            //Localidad 2
-            stages[1].locations[1].times = stages[1].filmingDays;
-            //Localidad 3
-            stages[1].locations[2].times = stages[1].filmingDays;
-            //Localidad 4
-            stages[1].locations[3].times = stages[1].filmingDays;
+            #region Asignar dias localidades
+            foreach (Location item in stages[1].locations)
+            {
+                item.times = stages[1].filmingDays;
+            }
+            #endregion
+
             /***************** Localidades en escenas ****************/
             stages[1].scenes[0].localizationScene = stages[1].locations[3];
             stages[1].scenes[1].localizationScene = stages[1].locations[2];
             stages[1].scenes[2].localizationScene = stages[1].locations[1];
             stages[1].scenes[3].localizationScene = stages[1].locations[0];
+            stages[1].scenes[4].localizationScene = stages[1].locations[4];
             /******************* Actores en escenas ******************/
             //Escenea 1
             stages[1].scenes[0].listActors.Add(stages[1].actors[0]);
             stages[1].scenes[0].listActors.Add(stages[1].actors[2]);
             //Escenea 2
-            stages[1].scenes[1].listActors.Add(stages[1].actors[0]);
-            stages[1].scenes[1].listActors.Add(stages[1].actors[1]);
+            stages[1].scenes[1].listActors.Add(stages[1].actors[2]);
+            stages[1].scenes[1].listActors.Add(stages[1].actors[3]);
             //Escenea 3
-            stages[1].scenes[2].listActors.Add(stages[1].actors[2]);
             stages[1].scenes[2].listActors.Add(stages[1].actors[1]);
+            stages[1].scenes[2].listActors.Add(stages[1].actors[4]);
             //Escenea 4
-            stages[1].scenes[3].listActors.Add(stages[1].actors[1]);
-            stages[1].scenes[3].listActors.Add(stages[1].actors[2]);
+            stages[1].scenes[3].listActors.Add(stages[1].actors[0]);
+            stages[1].scenes[3].listActors.Add(stages[1].actors[4]);
+            //Escenea 5
+            stages[1].scenes[4].listActors.Add(stages[1].actors[3]);
+            stages[1].scenes[4].listActors.Add(stages[1].actors[5]);
         }
         public void setStage3()
         {
-            /******************* Dias en Actores **********************/
-            //Actor 1
-            stages[2].actors[0].available = stages[2].filmingDays;
-            //Actor 2
-            stages[2].actors[1].available = stages[2].filmingDays;
-            //Actor 3
-            stages[2].actors[2].available = stages[2].filmingDays;
-            //Actor 4
-            stages[2].actors[3].available = stages[2].filmingDays;
+            #region Asignar dias de filmacion
+            foreach (Actor item in stages[2].actors)
+            {
+                item.available = stages[2].filmingDays;
+            }
+            #endregion
 
-            //*************** Dias en Localidades**********************/
-            //Localidad 1
-            stages[2].locations[0].times = stages[2].filmingDays;
-            //Localidad 2
-            stages[2].locations[1].times = stages[2].filmingDays;
-            //Localidad 3
-            stages[2].locations[2].times = stages[2].filmingDays;
-            //Localidad 4
-            stages[2].locations[3].times = stages[2].filmingDays;
-            //Localidad 5
-            stages[2].locations[4].times = stages[2].filmingDays;
+            #region Asignar dias localidades
+            foreach (Location item in stages[2].locations)
+            {
+                item.times = stages[2].filmingDays;
+            }
+            #endregion
+
             /***************** Localidades en escenas ****************/
-            stages[2].scenes[0].localizationScene = stages[2].locations[0];
-            stages[2].scenes[1].localizationScene = stages[2].locations[1];
-            stages[2].scenes[2].localizationScene = stages[2].locations[2];
-            stages[2].scenes[3].localizationScene = stages[2].locations[3];
-            stages[2].scenes[4].localizationScene = stages[2].locations[4];
+            stages[2].scenes[0].localizationScene = stages[2].locations[3];
+            stages[2].scenes[1].localizationScene = stages[2].locations[2];
+            stages[2].scenes[2].localizationScene = stages[2].locations[1];
+            stages[2].scenes[3].localizationScene = stages[2].locations[0];
+            stages[2].scenes[4].localizationScene = stages[2].locations[5];
+            stages[2].scenes[5].localizationScene = stages[2].locations[4];
             /******************* Actores en escenas ******************/
             //Escenea 1
             stages[2].scenes[0].listActors.Add(stages[2].actors[0]);
-            stages[2].scenes[0].listActors.Add(stages[2].actors[1]);
+            stages[2].scenes[0].listActors.Add(stages[2].actors[2]);
             //Escenea 2
-            stages[2].scenes[1].listActors.Add(stages[2].actors[1]);
             stages[2].scenes[1].listActors.Add(stages[2].actors[2]);
+            stages[2].scenes[1].listActors.Add(stages[2].actors[3]);
             //Escenea 3
-            stages[2].scenes[2].listActors.Add(stages[2].actors[2]);
-            stages[2].scenes[2].listActors.Add(stages[2].actors[3]);
+            stages[2].scenes[2].listActors.Add(stages[2].actors[1]);
+            stages[2].scenes[2].listActors.Add(stages[2].actors[4]);
             //Escenea 4
-            stages[2].scenes[3].listActors.Add(stages[2].actors[1]);
-            stages[2].scenes[3].listActors.Add(stages[2].actors[3]);
+            stages[2].scenes[3].listActors.Add(stages[2].actors[0]);
+            stages[2].scenes[3].listActors.Add(stages[2].actors[4]);
             //Escenea 5
-            stages[2].scenes[4].listActors.Add(stages[2].actors[2]);
             stages[2].scenes[4].listActors.Add(stages[2].actors[3]);
+            stages[2].scenes[4].listActors.Add(stages[2].actors[5]);
+            //Escenea 6
+            stages[2].scenes[5].listActors.Add(stages[2].actors[6]);
+            stages[2].scenes[5].listActors.Add(stages[2].actors[1]);
+
         }
         public void setStage4()
         {
-            /******************* Dias en Actores **********************/
-            //Actor 1
-            stages[3].actors[0].available = stages[3].filmingDays;
-            //Actor 2
-            stages[3].actors[1].available = stages[3].filmingDays;
-            //Actor 3
-            stages[3].actors[2].available = stages[3].filmingDays;
-            //Actor 4
-            stages[3].actors[3].available = stages[3].filmingDays;
-            //Actor 5
-            stages[3].actors[4].available = stages[3].filmingDays;
-            //*************** Dias en Localidades**********************/
-            //Localidad 1
-            stages[3].locations[0].times = stages[3].filmingDays;
-            //Localidad 2
-            stages[3].locations[1].times = stages[3].filmingDays;
-            //Localidad 3
-            stages[3].locations[2].times = stages[3].filmingDays;
-            //Localidad 4
-            stages[3].locations[3].times = stages[3].filmingDays;
-            //Localidad 5
-            stages[3].locations[4].times = stages[3].filmingDays;
-            //Localidad 6
-            stages[3].locations[5].times = stages[3].filmingDays;
+            #region Asignar dias de filmacion
+            foreach (Actor item in stages[3].actors)
+            {
+                item.available = stages[3].filmingDays;
+            }
+            #endregion
+
+            #region Asignar dias localidades
+            foreach (Location item in stages[3].locations)
+            {
+                item.times = stages[3].filmingDays;
+            }
+            #endregion
+
             /***************** Localidades en escenas ****************/
-            stages[3].scenes[0].localizationScene = stages[3].locations[0];
-            stages[3].scenes[1].localizationScene = stages[3].locations[1];
-            stages[3].scenes[2].localizationScene = stages[3].locations[5];
-            stages[3].scenes[3].localizationScene = stages[3].locations[3];
-            stages[3].scenes[4].localizationScene = stages[3].locations[4];
-            stages[3].scenes[5].localizationScene = stages[3].locations[2];
-            //******************* Actores en escenas ******************/
+            stages[3].scenes[0].localizationScene = stages[3].locations[3];
+            stages[3].scenes[1].localizationScene = stages[3].locations[2];
+            stages[3].scenes[2].localizationScene = stages[3].locations[1];
+            stages[3].scenes[3].localizationScene = stages[3].locations[0];
+            stages[3].scenes[4].localizationScene = stages[3].locations[5];
+            stages[3].scenes[5].localizationScene = stages[3].locations[4];
+            stages[3].scenes[6].localizationScene = stages[3].locations[6];
+            /******************* Actores en escenas ******************/
             //Escenea 1
             stages[3].scenes[0].listActors.Add(stages[3].actors[0]);
-            stages[3].scenes[0].listActors.Add(stages[3].actors[1]);
+            stages[3].scenes[0].listActors.Add(stages[3].actors[2]);
             //Escenea 2
-            stages[3].scenes[1].listActors.Add(stages[3].actors[0]);
             stages[3].scenes[1].listActors.Add(stages[3].actors[2]);
-            //Escenea 3
-            stages[3].scenes[2].listActors.Add(stages[3].actors[2]);
-            stages[3].scenes[2].listActors.Add(stages[3].actors[3]);
+            stages[3].scenes[1].listActors.Add(stages[3].actors[3]);
+            //Escenea 
+            stages[3].scenes[2].listActors.Add(stages[3].actors[1]);
+            stages[3].scenes[2].listActors.Add(stages[3].actors[4]);
             //Escenea 4
-            stages[3].scenes[3].listActors.Add(stages[3].actors[1]);
-            stages[3].scenes[3].listActors.Add(stages[3].actors[4]);
+            stages[3].scenes[3].listActors.Add(stages[3].actors[0]);
+            stages[3].scenes[3].listActors.Add(stages[3].actors[7]);
             //Escenea 5
-            stages[3].scenes[4].listActors.Add(stages[3].actors[2]);
-            stages[3].scenes[4].listActors.Add(stages[3].actors[4]);
+            stages[3].scenes[4].listActors.Add(stages[3].actors[3]);
+            stages[3].scenes[4].listActors.Add(stages[3].actors[5]);
             //Escenea 6
-            stages[3].scenes[5].listActors.Add(stages[3].actors[2]);
-            stages[3].scenes[5].listActors.Add(stages[3].actors[3]);
+            stages[3].scenes[5].listActors.Add(stages[3].actors[6]);
+            stages[3].scenes[5].listActors.Add(stages[3].actors[1]);
+            //Escenea 6
+            stages[3].scenes[5].listActors.Add(stages[3].actors[7]);
+            stages[3].scenes[5].listActors.Add(stages[3].actors[4]);
         }
         public void imprimir()
         {
