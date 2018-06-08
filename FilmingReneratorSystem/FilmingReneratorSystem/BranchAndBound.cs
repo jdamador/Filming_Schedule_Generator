@@ -24,7 +24,7 @@ namespace FilmingReneratorSystem
         {
             evaluation = new Evaluating(stage);
             notVisited = evaluation.shallowClone(stage.scenes);
-            visited = evaluation.shallowClone(stage.scenes);
+           
             runBB();
             
         }
@@ -38,9 +38,9 @@ namespace FilmingReneratorSystem
             
             goAlgorithm(notVisited); // Go B&B
 
-            seeBestCalendar(); // see Best Calendar
+           // seeBestCalendar(); // see Best Calendar
 
-            seeEmpirical();
+          //  seeEmpirical();
 
             Console.ReadKey();
 
@@ -53,39 +53,31 @@ namespace FilmingReneratorSystem
         /// <param name="NotVisited"></param>
         public void goAlgorithm(List<Scene> notVisited)
         {
-            comp++;
+           // comp++;
             if (notVisited.Count == 0) 
             {
-                evaluation.seeCombination(visited);
-                Console.WriteLine("Costo: " + evaluation.getCostScenes(visited));
-                comp++;
                 if (evaluation.isFactible(visited)) {
-                    asig += evaluation.asig; comp += evaluation.comp;
-                    if (evaluation.getCostScenes(visited) < bestCalendar.bestCost ) 
-                    {
-                        asig += evaluation.asig;  comp += evaluation.comp;
+
+                    evaluation.seeCombination(visited);
+                    //Console.WriteLine("Costo: "+evaluation.getCostScenes(visited));
+                    if (evaluation.getCostCalendar(visited) < bestCalendar.bestCost) {
                         changeBestCalendar(visited);
-                        return;
                     }
-                    asig += evaluation.asig; comp += evaluation.comp;
+                    
                 }
             }
+            else
                 foreach(Scene scene in notVisited)
                 {
-                    asig++;
-                    // Print Branch
-                   
-                    comp++;
-                    // Impletation LC-FIFO
-                    if (evaluation.getCostScenes(visited) > bestCalendar.bestCost)
+                    if (evaluation.getCostCalendar(visited) >= bestCalendar.bestCost)
                     {
+                        Console.ReadKey();
                         return;
                     }
-                    //Generate Combination
                     this.visited.Remove(scene); this.visited.Add(scene); asig += 2;
                     List<Scene> auxScene = evaluation.shallowClone(notVisited); asig++;
                     auxScene.Remove(scene); asig++;
-                    asig += evaluation.asig; comp += evaluation.comp;
+                
                     goAlgorithm(auxScene);
                 }
             
@@ -99,7 +91,7 @@ namespace FilmingReneratorSystem
         public void changeBestCalendar(List<Scene> listScenes)
         {
             this.bestCalendar.listScenes = evaluation.shallowClone(listScenes);
-            this.bestCalendar.bestCost = evaluation.getCostScenes(bestCalendar.listScenes);
+            this.bestCalendar.bestCost = evaluation.getCostCalendar(bestCalendar.listScenes);
  
         }
         #endregion

@@ -18,7 +18,7 @@ namespace FilmingReneratorSystem
         public FilmingDay(bool isDay, int num)
         {
             numDia = num;
-           isDay = isDay;
+           this.isDay = isDay;
             setId();
         }
         public void setId()

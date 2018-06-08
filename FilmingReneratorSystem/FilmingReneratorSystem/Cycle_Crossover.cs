@@ -56,8 +56,9 @@ namespace FilmingReneratorSystem
         private List<Scene> createNew(int length)
         {
             List<Scene> list = new List<Scene>();
+            
             for (int i = 0; i < length; i++)
-                list[i] = null;
+                list.Add( null);
             return list;
         }
 
