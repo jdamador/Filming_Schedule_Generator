@@ -12,6 +12,7 @@ namespace FilmingReneratorSystem
         public List<Scene> visited = new List<Scene>();    // List visited
         public List<Scene> notVisited = new List<Scene>(); // List notVisited   
         public Calendar bestCalendar = new Calendar();
+        int cantNodes = 0;
         public int asig=0;public int comp=0; //Asig and Comp
         public Evaluating evaluation; // Contiene algunos metodos para validar
         #endregion
@@ -34,13 +35,13 @@ namespace FilmingReneratorSystem
         /// </summary>
         public void runBB()
         {
-      
 
+            cantNodes = 0;
             goAlgorithm(notVisited); // Go B&B
-
+            
             seeBestCalendar(); // see Best Calendar
-
-            //  seeEmpirical();
+           
+            seeEmpirical();
 
             Console.ReadKey();
 
@@ -53,35 +54,41 @@ namespace FilmingReneratorSystem
         /// <param name="NotVisited"></param>
         public void goAlgorithm(List<Scene> notVisited)
         {
-           // comp++;
+            comp++;
             if (notVisited.Count == 0) 
             {
-
+                // Poda
+                comp++;
                 if (evaluation.isFactible(visited))
                 {
 
                     evaluation.seeCombination(visited);
                     Console.WriteLine("Costo: " + evaluation.getCostCalendar(visited));
+                    
+                    comp++;
                     if (evaluation.getCostCalendar(visited) <= bestCalendar.bestCost) {
                         changeBestCalendar(visited);
                     }
-
+                    asig += evaluation.asig; comp += evaluation.comp;
                 }
+                asig += evaluation.asig; comp += evaluation.comp;
             }
-            else
-                foreach(Scene scene in notVisited)
+            else {
+                asig++;
+                foreach (Scene scene in notVisited)
                 {
-                    //if (evaluation.getCostCalendar(visited) >= bestCalendar.bestCost)
-                    //{
-                    //    return;
-                    //}
+                
+                    asig++;
                     this.visited.Remove(scene); this.visited.Add(scene); asig += 2;
+                    
                     List<Scene> auxScene = evaluation.shallowClone(notVisited); asig++;
                     auxScene.Remove(scene); asig++;
-                
+
+
+                    cantNodes++;
                     goAlgorithm(auxScene);
                 }
-            
+            }
         }
         #endregion
         #region Change Best Calendar
@@ -91,6 +98,7 @@ namespace FilmingReneratorSystem
         /// <param name="listScenes"></param>
         public void changeBestCalendar(List<Scene> listScenes)
         {
+            asig += 2;
             this.bestCalendar.listScenes = evaluation.shallowClone(listScenes);
             this.bestCalendar.bestCost = evaluation.getCostCalendar(bestCalendar.listScenes);
  
@@ -102,6 +110,7 @@ namespace FilmingReneratorSystem
             Console.WriteLine("========= Mejor Calendario ========= ");
             evaluation.seeCombination(bestCalendar.listScenes);
             Console.WriteLine("COSTO: " + bestCalendar.bestCost);
+            Console.WriteLine("Cantidad de nodos creados: "+cantNodes);
         }
         /// <summary>
         /// See Measurement Empirical 
