@@ -86,13 +86,16 @@ namespace FilmingReneratorSystem
         public void seeCombination(List<Scene> list)
         {
             Console.WriteLine("");
-            // Console.WriteLine("#-#-#-#-#-#-#-#-#-# CALENDARIO #-#-#-#-#-#-#-#-#-#");
+            
             string line = "";
             foreach (Scene scene in list)
             {
                 line += scene.id + " ";
             }
-            Console.WriteLine(line);
+            Console.Write("COMBINACION: ");
+            Console.Write(line);
+            Console.Write("==> ");
+            Console.WriteLine("COSTO: "+getCostCalendar(list));
         }
         public int getCostCalendar(List<Scene> scenes)
         {
