@@ -13,28 +13,22 @@ namespace FilmingReneratorSystem
         static Movie movie;
         static void Main(String[] ar)
         {
-            
-                Console.WriteLine("");
                 movie = new Movie();
                 stimateCosts();
-            //Console.WriteLine("|o|o|o|o|o|o|o|o|o|o|o|o|o|o|o|o|o| ESCENARIO " + (i + 1) + " |o|o|o|o|o|o|o|o|o|o|o|o|o|o|o|o|o|");
-            //new BranchAndBound(movie.stages[0]);
-            //}
-            Console.ReadKey();
-           stimateCosts();
+                stimateCosts();
         }
         private static void stimateCosts()
         {
             /*Estimacion de soluciones para los diferentes escenarios*/
-            Console.WriteLine(" _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n" +
-                              "|   Bienvenido al sistema de calculo de horarios de filmación      |\n" +
-                              "|                                                                  |\n" +
-                              "| 1) Ver mediciones (Memoria)                                      |\n" +
-                              "| 2) Imprimir combinaciones para tamaños pequeños                  |\n" +
-                              "| 3) Imprimir cruces geneticos y sus mutaciones                    |\n" +
-                              "| 4) Ver Ramificación y Poda                                       |\n" +
-                              "| 5) Salir                                                         |\n" +
-                              "|_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ |\n");
+            Console.WriteLine("                        ♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦\n" +
+                              "                        ♦   Bienvenido al sistema de optimizacion de horarios de filmación     ♦\n" +
+                              "                        ♦                                                                      ♦\n" +
+                              "                        ♦         1) Ver mediciones (Memoria)                                  ♦\n" +
+                              "                        ♦         2) Imprimir combinaciones para tamaños pequeños              ♦\n" +
+                              "                        ♦         3) Imprimir cruces geneticos y sus mutaciones                ♦\n" +
+                              "                        ♦         4) Ver Ramificación y Poda                                   ♦\n" +
+                              "                        ♦         5) Salir                                                     ♦\n" +
+                              "                        ♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦\n");
             switch (Console.Read())
             {
                 case '1':
@@ -62,7 +56,7 @@ namespace FilmingReneratorSystem
                               "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n");
             for (int i = 0; i < movie.stages.Count; i++)
             {
-                Console.WriteLine("|o|o|o|o|o|o|o|o|o|o|o|o|o|o|o|o|o| ESCENARIO " + (i + 1) + " |o|o|o|o|o|o|o|o|o|o|o|o|o|o|o|o|o|");
+                Console.WriteLine("♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦ ESCENARIO " + (i + 1) + "♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦");
                 new BranchAndBound(movie.stages[i]);
             }
 
@@ -70,9 +64,9 @@ namespace FilmingReneratorSystem
         }
         private static void printCrossovers()
         {
-            Console.WriteLine("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n" +
-                              "■                          IMPRIMIENDO CROSSOVERS                 ■\n" +
-                              "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n");
+            Console.WriteLine("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n" +
+                              "■■                                            IMPRIMIENDO CROSSOVERS                                                  ■■\n" +
+                              "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
             foreach (Stage item in movie.stages)
             {
                 new GeneticAlgorithm(item);

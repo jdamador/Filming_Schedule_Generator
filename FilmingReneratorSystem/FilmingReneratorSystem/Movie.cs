@@ -34,7 +34,7 @@ namespace FilmingReneratorSystem
         /// </summary>
         public void createStage()
         {
-            for (int i = 1; i <= 5; i++)
+            for (int i = 1; i < 5; i++)
             {
                 stages.Add(new Stage(i ));
             }

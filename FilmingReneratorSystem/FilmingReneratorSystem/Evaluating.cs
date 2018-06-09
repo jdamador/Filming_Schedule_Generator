@@ -100,7 +100,7 @@ namespace FilmingReneratorSystem
             asig++; comp++;
             for (int i = 0; i < scenes.Count; i++)
             {
-                asig+=2; comp++;
+                asig += 2; comp++;
                 scenes[i].dayF = stage.filmingDays[i];
             }
             int totalCost = 0; asig++;
@@ -111,7 +111,7 @@ namespace FilmingReneratorSystem
                 totalCost += a.costTotal; asig++;
             }
             asig++;
-            return totalCost; 
+            return totalCost;
         }
 
         private void setCostActores(List<Scene> scenes)
@@ -138,6 +138,10 @@ namespace FilmingReneratorSystem
                 if (a.lastDay != null && a.firstDay !=null)
                     a.costTotal = ((a.lastDay.numDia - a.firstDay.numDia) + 1) * a.costXDay; asig++;
             }
+        }
+        public int getCostScene(Scene e)
+        {   
+            return e.listActors[0].costTotal + e.listActors[1].costTotal;
         }
     }
 }
