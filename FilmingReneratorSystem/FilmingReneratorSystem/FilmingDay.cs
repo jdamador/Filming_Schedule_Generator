@@ -1,4 +1,10 @@
-﻿using System;
+﻿/********************************************
+ * Autores: Daniel Amador Salas
+ *          Pablo Brenes Alfaro
+ * Fecha de Inicio: 27/05/2018
+ * Fecha de última modificación: 09/06/2018
+ * ******************************************/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,15 +18,24 @@ namespace FilmingReneratorSystem
 
         /**************All variables declaration here**************/
         public String id;
-        public int numDia;                  /*day or night*/
+        public int numDia;
         public int maxHour;
         public bool isDay;
+        public int valueMemory=0;
         public FilmingDay(bool isDay, int num)
         {
             numDia = num;
-           this.isDay = isDay;
+            this.isDay = isDay;
             setId();
+            valueMemory += 32;//numDia
+            valueMemory += 32;//maxHour
+            valueMemory += 1;//isDay
+            valueMemory += id.Length * 16;//string ID
+
         }
+        /// <summary>
+        /// Set if time is morning or night
+        /// </summary>
         public void setId()
         {
             if (isDay)

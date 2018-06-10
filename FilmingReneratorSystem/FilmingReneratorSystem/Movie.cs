@@ -1,4 +1,10 @@
-﻿using FilmingReneratorSystem;
+﻿/********************************************
+ * Autores: Daniel Amador Salas
+ *          Pablo Brenes Alfaro
+ * Fecha de Inicio: 27/05/2018
+ * Fecha de última modificación: 09/06/2018
+ * ******************************************/
+using FilmingReneratorSystem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +19,10 @@ namespace FilmingReneratorSystem
 
         /*********All variable declaration here***********/
         public List<Stage> stages = new List<Stage>(); /*Stage List*/
-
+        
+        /// <summary>
+        /// Call all methods to create stages
+        /// </summary>
         public Movie()
         {
             createStage();
@@ -25,12 +34,11 @@ namespace FilmingReneratorSystem
             setStage2();
             setStage3();
             setStage4();
-            //imprimir();
-
         }
+
         /**************************** CREATE LISTS **************************************/
         /// <summary>
-        /// Crea 4 escenarios
+        /// create four stages
         /// </summary>
         public void createStage()
         {
@@ -40,7 +48,7 @@ namespace FilmingReneratorSystem
             }
         }
         /// <summary>
-        /// Creaa las escenas que seran grabadas
+        /// create scentes to film
         /// </summary>
         public void createScenes()
         {
@@ -50,8 +58,8 @@ namespace FilmingReneratorSystem
                 {
                     stages[i].scenes.Add(new Scene(j+1));
                 }
-
         }
+
         /// <summary>
         /// Crea los recursos que se utiizaran en la grabacion
         /// </summary>
@@ -102,6 +110,7 @@ namespace FilmingReneratorSystem
             foreach (Actor item in stages[0].actors)
             {
                 item.available = stages[0].filmingDays;
+                item.setMemory();
             }
             #endregion
 
@@ -109,6 +118,7 @@ namespace FilmingReneratorSystem
             foreach (Location item in stages[0].locations)
             {
                 item.times = stages[0].filmingDays;
+                item.setMemory();
             }
             #endregion
 
@@ -131,6 +141,11 @@ namespace FilmingReneratorSystem
             //Escenea 4
             stages[0].scenes[3].listActors.Add(stages[0].actors[0]);
             stages[0].scenes[3].listActors.Add(stages[0].actors[4]);
+            foreach (Scene item in stages[0].scenes)
+                item.setMemory();
+            stages[0].valueMemory += stages[0].scenes[0].valueMemory * stages[0].scenes.Count;
+           
+
             #endregion
         }
         public void setStage2()
@@ -139,6 +154,7 @@ namespace FilmingReneratorSystem
             foreach (Actor item in stages[1].actors)
             {
                 item.available = stages[1].filmingDays;
+                item.setMemory();
             }
             #endregion
 
@@ -146,6 +162,7 @@ namespace FilmingReneratorSystem
             foreach (Location item in stages[1].locations)
             {
                 item.times = stages[1].filmingDays;
+                item.setMemory();
             }
             #endregion
 
@@ -171,6 +188,10 @@ namespace FilmingReneratorSystem
             //Escenea 5
             stages[1].scenes[4].listActors.Add(stages[1].actors[3]);
             stages[1].scenes[4].listActors.Add(stages[1].actors[5]);
+            foreach (Scene item in stages[1].scenes)
+                item.setMemory();
+            stages[1].valueMemory += stages[1].scenes[0].valueMemory * stages[1].scenes.Count;
+          
         }
         public void setStage3()
         {
@@ -178,6 +199,7 @@ namespace FilmingReneratorSystem
             foreach (Actor item in stages[2].actors)
             {
                 item.available = stages[2].filmingDays;
+                item.setMemory();
             }
             #endregion
 
@@ -185,6 +207,7 @@ namespace FilmingReneratorSystem
             foreach (Location item in stages[2].locations)
             {
                 item.times = stages[2].filmingDays;
+                item.setMemory();
             }
             #endregion
 
@@ -214,7 +237,10 @@ namespace FilmingReneratorSystem
             //Escenea 6
             stages[2].scenes[5].listActors.Add(stages[2].actors[6]);
             stages[2].scenes[5].listActors.Add(stages[2].actors[1]);
-
+            foreach (Scene item in stages[2].scenes)
+                item.setMemory();
+            stages[2].valueMemory += stages[2].scenes[0].valueMemory * stages[2].scenes.Count;
+           
         }
         public void setStage4()
         {
@@ -222,6 +248,7 @@ namespace FilmingReneratorSystem
             foreach (Actor item in stages[3].actors)
             {
                 item.available = stages[3].filmingDays;
+                item.setMemory();
             }
             #endregion
 
@@ -229,6 +256,7 @@ namespace FilmingReneratorSystem
             foreach (Location item in stages[3].locations)
             {
                 item.times = stages[3].filmingDays;
+                item.setMemory();
             }
             #endregion
 
@@ -260,8 +288,13 @@ namespace FilmingReneratorSystem
             stages[3].scenes[5].listActors.Add(stages[3].actors[6]);
             stages[3].scenes[5].listActors.Add(stages[3].actors[1]);
             //Escenea 6
-            stages[3].scenes[5].listActors.Add(stages[3].actors[7]);
-            stages[3].scenes[5].listActors.Add(stages[3].actors[4]);
+            stages[3].scenes[6].listActors.Add(stages[3].actors[7]);
+            stages[3].scenes[6].listActors.Add(stages[3].actors[4]);
+            
+            foreach (Scene item in stages[3].scenes)
+                item.setMemory();
+            stages[3].valueMemory += stages[3].scenes[0].valueMemory * stages[3].scenes.Count;
+          
         }
         public void imprimir()
         {
@@ -285,12 +318,8 @@ namespace FilmingReneratorSystem
                     {
                         Console.WriteLine("**** Dia # " + f.id + " >>");
                     }
-
-
                 }
            // }
-
-
         }
 
 

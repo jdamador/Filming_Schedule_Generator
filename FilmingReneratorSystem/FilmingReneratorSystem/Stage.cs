@@ -1,4 +1,10 @@
-﻿using System;
+﻿/********************************************
+ * Autores: Daniel Amador Salas
+ *          Pablo Brenes Alfaro
+ * Fecha de Inicio: 27/05/2018
+ * Fecha de última modificación: 09/06/2018
+ * ******************************************/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +19,7 @@ namespace FilmingReneratorSystem
         /*All variable declarations here*/
         public int idStage;
         public List<Calendar> calendars;
-
+        public int valueMemory = 0;
         public List<FilmingDay> filmingDays = new List<FilmingDay>();   /*all filming day for this movie*/
         public List<Actor> actors = new List<Actor>();                  /*All actor that take part in this filming*/
         public List<Location> locations = new List<Location>();         /*All locations available to film for this movie*/
@@ -24,5 +30,6 @@ namespace FilmingReneratorSystem
         {
             this.idStage = id;
         }
+       
     }
 }

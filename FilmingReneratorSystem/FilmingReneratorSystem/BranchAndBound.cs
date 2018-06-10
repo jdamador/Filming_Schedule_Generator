@@ -1,4 +1,10 @@
-﻿using System;
+﻿/********************************************
+ * Autores: Daniel Amador Salas
+ *          Pablo Brenes Alfaro
+ * Fecha de Inicio: 27/05/2018
+ * Fecha de última modificación: 09/06/2018
+ * ******************************************/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +18,10 @@ namespace FilmingReneratorSystem
         public List<Scene> visited = new List<Scene>();    // List visited
         public List<Scene> notVisited = new List<Scene>(); // List notVisited   
         public Calendar bestCalendar = new Calendar();
-        int cantNodes = 0;
+        int cantNodes = 0; 
         public int asig=0;public int comp=0; //Asig and Comp
-        public Evaluating evaluation; // Contiene algunos metodos para validar
+        public Evaluating evaluation; // Contain any methods to evaluate
+        public int memory=0;
         #endregion
         #region Region to start B&B
         /// <summary>
@@ -23,7 +30,8 @@ namespace FilmingReneratorSystem
         /// <param name="stage"></param>
         public BranchAndBound(Stage stage)
         {
-            evaluation = new Evaluating(stage);
+            evaluation = new Evaluating(stage); 
+
             notVisited = evaluation.shallowClone(stage.scenes);
             //visited = evaluation.shallowClone(stage.scenes);
             runBB();
@@ -37,6 +45,7 @@ namespace FilmingReneratorSystem
         {
 
             cantNodes = 0;
+
             goAlgorithm(notVisited); // Go B&B
             
             seeBestCalendar(); // see Best Calendar
@@ -61,27 +70,35 @@ namespace FilmingReneratorSystem
                 comp++;
                 if (evaluation.isFactible(visited))
                 {
+                    memory += evaluation.memory;
 
                     evaluation.seeCombination(visited);
+
                     Console.WriteLine("Costo: " + evaluation.getCostCalendar(visited));
                     
                     comp++;
-                    if (evaluation.getCostCalendar(visited) <= bestCalendar.bestCost) {
+                    if (evaluation.getCostCalendar(visited) <= bestCalendar.bestCost) { //Change best calendar
                         changeBestCalendar(visited);
                     }
+                    memory += evaluation.memory;
                     asig += evaluation.asig; comp += evaluation.comp;
                 }
+                else
+                    memory += evaluation.memory;
                 asig += evaluation.asig; comp += evaluation.comp;
             }
             else {
                 asig++;
+                memory += new Scene(0).valueMemory;
                 foreach (Scene scene in notVisited)
                 {
                 
                     asig++;
+                    // Combination
                     this.visited.Remove(scene); this.visited.Add(scene); asig += 2;
                     
                     List<Scene> auxScene = evaluation.shallowClone(notVisited); asig++;
+                    memory += auxScene.Count * new Scene(0).valueMemory;
                     auxScene.Remove(scene); asig++;
 
 
@@ -100,17 +117,23 @@ namespace FilmingReneratorSystem
         {
             asig += 2;
             this.bestCalendar.listScenes = evaluation.shallowClone(listScenes);
+            memory += listScenes[0].valueMemory * listScenes.Count;
             this.bestCalendar.bestCost = evaluation.getCostCalendar(bestCalendar.listScenes);
- 
+            memory += evaluation.memory;
+
         }
         #endregion
         #region seeBestCalendar
+        /// <summary>
+        /// See best calendar
+        /// </summary>
         public void seeBestCalendar()
         {
             Console.WriteLine("========= Mejor Calendario ========= ");
             evaluation.seeCombination(bestCalendar.listScenes);
             Console.WriteLine("COSTO: " + bestCalendar.bestCost);
             Console.WriteLine("Cantidad de nodos creados: "+cantNodes);
+            Console.WriteLine("Cantidad de memoria en KB " + memory/8/1024);
         }
         /// <summary>
         /// See Measurement Empirical 

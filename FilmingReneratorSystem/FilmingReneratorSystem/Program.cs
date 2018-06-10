@@ -1,4 +1,10 @@
-﻿using System;
+﻿/********************************************
+ * Autores: Daniel Amador Salas
+ *          Pablo Brenes Alfaro
+ * Fecha de Inicio: 27/05/2018
+ * Fecha de última modificación: 09/06/2018
+ * ******************************************/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,26 +25,22 @@ namespace FilmingReneratorSystem
         }
         private static void stimateCosts()
         {
-            /*Estimacion de soluciones para los diferentes escenarios*/
+            /*Estimation of solution for different scenes*/
             Console.WriteLine("                        ♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦\n" +
                               "                        ♦   Bienvenido al sistema de optimizacion de horarios de filmación     ♦\n" +
                               "                        ♦                                                                      ♦\n" +
                               "                        ♦         1) Ver mediciones (Memoria)                                  ♦\n" +
-                              "                        ♦         2) Imprimir combinaciones para tamaños pequeños              ♦\n" +
-                              "                        ♦         3) Imprimir cruces geneticos y sus mutaciones                ♦\n" +
-                              "                        ♦         4) Ver Ramificación y Poda                                   ♦\n" +
-                              "                        ♦         5) Salir                                                     ♦\n" +
+                              "                        ♦         2) Imprimir cruces geneticos y sus mutaciones                ♦\n" +
+                              "                        ♦         3) Ver Ramificación y Poda                                   ♦\n" +
                               "                        ♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦\n");
             switch (Console.Read())
             {
                 case '1':
                     showDataTest(); break;
                 case '2':
-                    ShowCombinations(); break;
-                case '3':
                     printCrossovers(); break;
-                case '4':
-                    showRamificacionPoda(); break;
+                case '3':
+                    showRamificacionPoda(); break;                        
                 default:
                     stimateCosts();
                     break;
@@ -49,7 +51,7 @@ namespace FilmingReneratorSystem
 
         }
 
-
+        // Show Branch and Bound
         private static void showRamificacionPoda() {
             Console.WriteLine("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n" +
                               "■                       Ramificación y Poda                       ■\n" +
@@ -62,6 +64,7 @@ namespace FilmingReneratorSystem
 
             
         }
+        // Print Crossovers (Cycle Cross and One Order)
         private static void printCrossovers()
         {
             Console.WriteLine("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n" +
@@ -73,12 +76,6 @@ namespace FilmingReneratorSystem
             }
 
         }
-
-        private static void ShowCombinations()
-        {
-         
-        }
-
         private static void showDataTest()
         {
             Console.WriteLine("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n" +
