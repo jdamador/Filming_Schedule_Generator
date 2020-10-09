@@ -1,0 +1,5 @@
+# Filming_Schedule_Generator
+
+El cine es uno de los mercados más interesantes y caros de realizar, más aún, si se le agrega el hecho de que no lo produzca una de las grandes empresas cinematográficas. Esto hace que se comiencen a ver problemas de presupuesto, lo que produce una limitante de recursos para implementar en actores, escenas. Es aquí cuando se recalca la necesidad de un sistema de optimización de los recursos, con el objetivo de reducir el coste de producción de una filmación.
+El principal problema al organizar la grabación de una película es poder tener disponibilidad del lugar de grabación y de los actores para poder rodar las escenas. Una mala asignación de recursos se traduce como pérdidas para la empresa, pues con cada día que transcurre hasta el último día del contrato de un actor se le debe pagar sus servicios. 
+Programar jornadas de grabación eficientes es primordial para cualquier empresa que desee grabar una película. Entonces, para dar solución a este problema de optimización se proponen dos algoritmos con los que se plantea encontrar la solución eficiente. 
